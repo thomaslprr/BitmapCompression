@@ -10,7 +10,9 @@ public class Carre {
 	ArrayList<Carre> listeCarres;
 	
 	
-	
+	public Carre() {
+		
+	}
 	
 	public Carre(Color couleur, Position position) {
 		super();

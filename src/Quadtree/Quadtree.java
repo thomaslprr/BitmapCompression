@@ -28,32 +28,38 @@ public class Quadtree {
 		
 		carrePrincipal = new Carre(null,new Position(0,this.largeur,0,this.hauteur));
 		
-		//generation();
+		generation(carrePrincipal.getPosition(),carrePrincipal);
 		
 		
 	}
 	
-	public void generation(Position p){
-		ArrayList<Color> listeCouleurs = new ArrayList<>();
+	public void generation(Position p,Carre c){
+		ArrayList<Carre> listeCarres = new ArrayList<>();
+		
 		
 		if(!zoneEstDeLaMemeCouleur(p)) {
 			
 			//carre en haut a gauche
 			Position p1 = new Position(p.getxDepart(),p.getxArrive()/2,p.getyDepart(),p.getyArrive()/2);
-			generation(p1);
+			Carre carre1 = new Carre(null,p1);
+			generation(p1,carre1);
 			//carre en haut a droite
 			Position p2 = new Position(p.getxArrive()/2,p.getxArrive(),p.getyDepart(),p.getyArrive()/2);
-			generation(p2);
+			Carre carre2 = new Carre(null,p2);
+			generation(p2,carre2);
 			//carre en bas a droite
 			Position p3 = new Position(p.getxArrive()/2,p.getxArrive(),p.getyArrive()/2,p.getyArrive());
-			generation(p3);
+			Carre carre3 = new Carre(null,p3);
+			generation(p3,carre3);
 			//carre en bas a gauche
 			Position p4 = new Position(p.getxDepart(),p.getxArrive()/2,p.getyArrive()/2,p.getyArrive());
-			generation(p4);
+			Carre carre4 = new Carre(null,p4);
+			generation(p4,carre4);
 			
 			
 		}
 		
+		c.setListeCarres(listeCarres);
 		
 		
 	}
