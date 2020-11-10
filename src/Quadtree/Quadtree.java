@@ -3,9 +3,12 @@ package Quadtree;
 import ImagePng.ImagePNG;
 
 public class Quadtree {
+	
+	
 
 	
 	public Quadtree(ImagePNG image) {
+		
 		
 		
 	}
