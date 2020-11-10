@@ -1,27 +1,28 @@
 package Quadtree;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 public class Carre {
 	
-	String couleur;
+	Color couleur;
 	int position;
 	ArrayList<Carre> listeCarres;
 	
 	
 	
 	
-	public Carre(String couleur, int position) {
+	public Carre(Color couleur, int position) {
 		super();
 		this.couleur = couleur;
 		this.position = position;
 	}
 	
 	
-	public String getCouleur() {
+	public Color getCouleur() {
 		return couleur;
 	}
-	public void setCouleur(String couleur) {
+	public void setCouleur(Color couleur) {
 		this.couleur = couleur;
 	}
 	public int getPosition() {
