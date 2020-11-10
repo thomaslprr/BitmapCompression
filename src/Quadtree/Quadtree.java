@@ -4,12 +4,17 @@ import ImagePng.ImagePNG;
 
 public class Quadtree {
 	
+	Carre carrePrincipal;
 	
 
 	
 	public Quadtree(ImagePNG image) {
 		
 		
+		
+	}
+	
+	public void generation() {
 		
 	}
 	
