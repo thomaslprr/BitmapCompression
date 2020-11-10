@@ -21,6 +21,7 @@ public class Quadtree {
 		this.largeur=image.width();
 		this.hauteur= image.height();
 		
+		
 		if(largeur!=hauteur) {
 			//lever une exception
 			throw new Exception("La largeur et la hauteur ne sont pas similaires");
@@ -33,33 +34,56 @@ public class Quadtree {
 		
 	}
 	
-	public void generation(Position p,Carre c){
+	public void generation(Position p,Carre c) throws Exception{
 		ArrayList<Carre> listeCarres = new ArrayList<>();
 		
+		if(p.getTailleCarre()>=2) {
+
 		
 		if(!zoneEstDeLaMemeCouleur(p)) {
 			
-			//carre en haut a gauche
-			Position p1 = new Position(p.getxDepart(),p.getxArrive()/2,p.getyDepart(),p.getyArrive()/2);
-			Carre carre1 = new Carre(null,p1);
-			generation(p1,carre1);
-			//carre en haut a droite
-			Position p2 = new Position(p.getxArrive()/2,p.getxArrive(),p.getyDepart(),p.getyArrive()/2);
-			Carre carre2 = new Carre(null,p2);
-			generation(p2,carre2);
-			//carre en bas a droite
-			Position p3 = new Position(p.getxArrive()/2,p.getxArrive(),p.getyArrive()/2,p.getyArrive());
-			Carre carre3 = new Carre(null,p3);
-			generation(p3,carre3);
-			//carre en bas a gauche
-			Position p4 = new Position(p.getxDepart(),p.getxArrive()/2,p.getyArrive()/2,p.getyArrive());
-			Carre carre4 = new Carre(null,p4);
-			generation(p4,carre4);
 			
+			
+			//carre en haut a gauche
+			Position p1 = new Position(p.getxDepart(),(p.getxArrive()+p.getxDepart())/2,p.getyDepart(),p.getyArrive()/2);
+			Carre carre1 = new Carre(null,p1);
+			listeCarres.add(carre1);
+			
+			
+			//carre en haut a droite
+			Position p2 = new Position((p.getxArrive()+p.getxDepart())/2,p.getxArrive(),p.getyDepart(),p.getyArrive()/2);
+			Carre carre2 = new Carre(null,p2);
+			listeCarres.add(carre2);
+			
+			
+			//carre en bas a droite
+			Position p3 = new Position((p.getxArrive()+p.getxDepart())/2,p.getxArrive(),(p.getyArrive()+p.getyDepart())/2,p.getyArrive());
+			Carre carre3 = new Carre(null,p3);
+			listeCarres.add(carre3);
+			
+			
+			//carre en bas a gauche
+			Position p4 = new Position(p.getxDepart(),(p.getxArrive()+p.getxDepart())/2,(p.getyArrive()+p.getyDepart())/2,p.getyArrive());
+			Carre carre4 = new Carre(null,p4);
+			listeCarres.add(carre4);
+			
+			c.setListeCarres(listeCarres);
+
+			generation(p1,carre1);
+			generation(p2,carre2);
+			generation(p3,carre3);
+			generation(p4,carre4);
+
+
+
+
+			
+			}
+			
+		
 			
 		}
 		
-		c.setListeCarres(listeCarres);
 		
 		
 	}

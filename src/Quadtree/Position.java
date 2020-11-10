@@ -10,14 +10,23 @@ public class Position {
 	
 	
 	
+	
 	public Position(int xDepart, int xArrive, int yDepart, int yArrive) {
-		super();
 		this.xDepart = xDepart;
 		this.xArrive = xArrive;
 		this.yDepart = yDepart;
 		this.yArrive = yArrive;
 	}
 	
+	
+	public String toString() {
+		return "x("+xDepart+","+xArrive+")  y("+yDepart+","+yArrive+")";
+	}
+	
+	
+	public int getTailleCarre() {
+		return Math.abs(xDepart-xArrive);
+	}
 	
 	public int getxDepart() {
 		return xDepart;

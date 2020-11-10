@@ -10,14 +10,17 @@ public class Carre {
 	ArrayList<Carre> listeCarres;
 	
 	
-	public Carre() {
-		
-	}
 	
-	public Carre(Color couleur, Position position) {
-		super();
+	
+	public Carre(Color couleur, Position position) throws Exception {
+
+		if(position.getTailleCarre()>=1) {
 		this.couleur = couleur;
 		this.position = position;
+		listeCarres= new ArrayList<>();
+		}else {
+			throw new Exception("Taille du carré plus petite que 1");
+		}
 	}
 	
 	
@@ -42,6 +45,10 @@ public class Carre {
 
 	public void setListeCarres(ArrayList<Carre> listeCarres) {
 		this.listeCarres = listeCarres;
+	}
+	
+	public String toString() {
+		return "Nouveau carré : "+position;
 	}
 	
 	
