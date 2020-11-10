@@ -6,13 +6,13 @@ import java.util.ArrayList;
 public class Carre {
 	
 	Color couleur;
-	int position;
+	Position position;
 	ArrayList<Carre> listeCarres;
 	
 	
 	
 	
-	public Carre(Color couleur, int position) {
+	public Carre(Color couleur, Position position) {
 		super();
 		this.couleur = couleur;
 		this.position = position;
@@ -25,10 +25,10 @@ public class Carre {
 	public void setCouleur(Color couleur) {
 		this.couleur = couleur;
 	}
-	public int getPosition() {
+	public Position getPosition() {
 		return position;
 	}
-	public void setPosition(int position) {
+	public void setPosition(Position position) {
 		this.position = position;
 	}
 

@@ -26,26 +26,30 @@ public class Quadtree {
 			throw new Exception("La largeur et la hauteur ne sont pas similaires");
 		}
 		
-		carrePrincipal = new Carre(null,);
+		carrePrincipal = new Carre(null,new Position(0,this.largeur,0,this.hauteur));
 		
 		//generation();
 		
 		
 	}
 	
-	public void generation(int xDepart, int xArrive, int yDepart, int yArrive){
+	public void generation(Position p){
 		ArrayList<Color> listeCouleurs = new ArrayList<>();
 		
-		if(!zoneEstDeLaMemeCouleur(xDepart,xArrive,yDepart,yArrive)) {
+		if(!zoneEstDeLaMemeCouleur(p)) {
 			
 			//carre en haut a gauche
-			generation(xDepart,xArrive/2,yDepart,yArrive/2);
+			Position p1 = new Position(p.getxDepart(),p.getxArrive()/2,p.getyDepart(),p.getyArrive()/2);
+			generation(p1);
 			//carre en haut a droite
-			generation(xArrive/2,xArrive,yDepart,yArrive/2);
+			Position p2 = new Position(p.getxArrive()/2,p.getxArrive(),p.getyDepart(),p.getyArrive()/2);
+			generation(p2);
 			//carre en bas a droite
-			generation(xArrive/2,xArrive,yArrive/2,yArrive);
+			Position p3 = new Position(p.getxArrive()/2,p.getxArrive(),p.getyArrive()/2,p.getyArrive());
+			generation(p3);
 			//carre en bas a gauche
-			generation(xDepart,xArrive/2,yArrive/2,yArrive);
+			Position p4 = new Position(p.getxDepart(),p.getxArrive()/2,p.getyArrive()/2,p.getyArrive());
+			generation(p4);
 			
 			
 		}
@@ -54,12 +58,12 @@ public class Quadtree {
 		
 	}
 	
-	public boolean zoneEstDeLaMemeCouleur(int xDepart, int xArrive, int yDepart, int yArrive) {
+	public boolean zoneEstDeLaMemeCouleur(Position p) {
 		
 		ArrayList<Color> listeCouleurs = new ArrayList<>();
 		
-		for(int x = xDepart; x<xArrive;x++) {
-			for(int y = yDepart; y<yArrive; y++) {
+		for(int x = p.getxDepart(); x<p.getxArrive();x++) {
+			for(int y = p.getyDepart(); y< p.getyArrive(); y++) {
 				Color c = image.getPixel(x, y);
 				if(!listeCouleurs.contains(c)) {
 					

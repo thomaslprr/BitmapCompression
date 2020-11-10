@@ -2,10 +2,10 @@ package Quadtree;
 
 public class Position {
 	
-	int xDepart;
-	int xArrive;
-	int yDepart;
-	int yArrive;
+	private int xDepart;
+	private int xArrive;
+	private int yDepart;
+	private int yArrive;
 	
 	
 	
