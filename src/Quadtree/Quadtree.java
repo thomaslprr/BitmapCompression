@@ -30,5 +30,16 @@ public class Quadtree {
 		
 	}
 	
+	public String toString() {
+		
+		return null;
+	}
+	
+	public ImagePNG toPNG() {
+		
+		//devra retourner une imagePNG
+		return null;
+	}
+	
 	
 }
