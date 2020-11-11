@@ -137,13 +137,17 @@ public class Carre {
 			
 		}else if(estPereDeFeuille()) {
 			
-			double ecartColorimetriqueMoyen = 0;
+			double ecartColorimetriqueMax = getListeCarres().get(0).getEcartColorimetrique();
 			
-			for(Carre c : getListeCarres()) {
-				ecartColorimetriqueMoyen+= c.getEcartColorimetrique();
+			for(int i=1; i<4;i++) {
+				double ecartTmp = getListeCarres().get(i).getEcartColorimetrique();
+				if(ecartTmp>ecartColorimetriqueMax) {
+					
+					ecartColorimetriqueMax = ecartTmp;
+				}
 			}
 			
-			return ecartColorimetriqueMoyen/4;
+			return ecartColorimetriqueMax;
 				
 			
 		}
