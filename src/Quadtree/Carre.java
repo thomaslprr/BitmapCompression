@@ -10,6 +10,7 @@ public class Carre {
 	Color couleur;
 	Position position;
 	ArrayList<Carre> listeCarres;
+	Color couleurMoyenne;
 	
 	
 	
@@ -23,6 +24,30 @@ public class Carre {
 		}else {
 			throw new Exception("Taille du carré plus petite que 1");
 		}
+	}
+	
+	public Color getCouleurMoyenne() {
+		if(listeCarres.size()==4) {
+			int rougeMoyen = 0 ;
+			int vertMoyen = 0;
+			int bleuMoyen = 0;
+			
+			for(Carre c : listeCarres) {
+				rougeMoyen+=c.getCouleur().getRed();
+				vertMoyen+= c.getCouleur().getGreen();
+				bleuMoyen+=c.getCouleur().getBlue();
+				
+				
+			}
+			
+			rougeMoyen /= 4;
+			vertMoyen /=4;
+			bleuMoyen /=4;
+			
+			return new Color(rougeMoyen,vertMoyen,bleuMoyen);
+		}
+		
+		return null;
 	}
 	
 	

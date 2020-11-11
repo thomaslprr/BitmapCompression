@@ -173,6 +173,9 @@ public class Quadtree {
 	
 	public ImagePNG toPNG() {
 		
+		
+		
+		
 		//devra retourner une imagePNG
 		return null;
 	}
