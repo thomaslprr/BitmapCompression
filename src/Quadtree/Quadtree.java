@@ -138,7 +138,8 @@ public class Quadtree {
 	
 	public String toString() {
 		
-		return recupererChaine(this.carrePrincipal);
+		String s = recupererChaine(this.carrePrincipal);
+		return s.replace("( ", "(");
 	}
 	
 	private String recupererChaine(Carre c) {
@@ -154,7 +155,7 @@ public class Quadtree {
 			
 			for(Carre carre : c.getListeCarres()) {
 				
-				s+=" "+carre+ " "+ recupererChaine(carre);
+				s+=" "+carre + recupererChaine(carre);
 				
 				
 			}
