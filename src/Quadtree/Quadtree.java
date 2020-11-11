@@ -16,6 +16,10 @@ public class Quadtree {
 	
 
 	
+	public Carre getCarrePrincipal() {
+		return carrePrincipal;
+	}
+
 	public Quadtree(ImagePNG image) throws Exception {
 		this.image = image;
 		this.largeur=image.width();
