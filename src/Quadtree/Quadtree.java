@@ -24,7 +24,7 @@ public class Quadtree {
 		
 		if(largeur!=hauteur) {
 			//lever une exception
-			throw new Exception("La largeur et la hauteur ne sont pas similaires");
+			throw new Exception("L'image n'est pas carré.");
 		}
 		
 		carrePrincipal = new Carre(null,new Position(0,this.largeur,0,this.hauteur));
