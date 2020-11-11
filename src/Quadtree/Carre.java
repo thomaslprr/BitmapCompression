@@ -11,13 +11,17 @@ public class Carre {
 	Position position;
 	ArrayList<Carre> listeCarres;
 	Color couleurMoyenne;
+	double ecartColorimetrique;
+	
+	Carre carrePere;
 	
 	
 	
 	
-	public Carre(Color couleur, Position position) throws Exception {
+	public Carre(Color couleur, Position position, Carre carrePere) throws Exception {
 
 		if(position.getTailleCarre()>=1) {
+		this.carrePere = carrePere;
 		this.couleur = couleur;
 		this.position = position;
 		listeCarres= new ArrayList<>();
@@ -26,13 +30,53 @@ public class Carre {
 		}
 	}
 	
-	public Color getCouleurMoyenne() {
+	
+	
+	public Carre getCarrePere() {
+		return carrePere;
+	}
+
+
+
+	public void setCarrePere(Carre carrePere) {
+		this.carrePere = carrePere;
+	}
+	
+	private boolean estFeuille() {
+		if(carrePere.getListeCarres().size()==4 && (this.getListeCarres().size() == 0 || this.getListeCarres() ==null) && this.getCouleur()!=null) {
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean estPereDeFeuille() {
 		if(listeCarres.size()==4) {
+			
+			for(Carre c : listeCarres) {
+				
+				if(c.getCouleur()==null) {
+					return false;
+				}
+				
+			}
+			
+			return true;
+			
+		}
+		
+		return false;
+	}
+
+
+
+	private Color getCouleurMoyenne() {
+		
+		if(estFeuille()) {
 			int rougeMoyen = 0 ;
 			int vertMoyen = 0;
 			int bleuMoyen = 0;
 			
-			for(Carre c : listeCarres) {
+			for(Carre c : carrePere.listeCarres) {
 				rougeMoyen+=c.getCouleur().getRed();
 				vertMoyen+= c.getCouleur().getGreen();
 				bleuMoyen+=c.getCouleur().getBlue();
@@ -44,10 +88,68 @@ public class Carre {
 			vertMoyen /=4;
 			bleuMoyen /=4;
 			
-			return new Color(rougeMoyen,vertMoyen,bleuMoyen);
+			Color cou = new Color(rougeMoyen,vertMoyen,bleuMoyen);
+			setCouleurMoyenne(cou);
+			return cou;
+			
 		}
 		
+		
 		return null;
+	}
+	
+	
+	public void setCouleurMoyenne(Color couleurMoyenne) {
+		this.couleurMoyenne = couleurMoyenne;
+	}
+
+
+
+	public void setEcartColorimetrique(double ecartColorimetrique) {
+		this.ecartColorimetrique = ecartColorimetrique;
+	}
+
+
+
+	public double getEcartColorimetrique() {
+		
+		
+		if(estFeuille()) {
+			
+			double ecartColorimetrique = 0;
+			
+			int rouge = 0;
+			int vert =0;
+			int bleu = 0;
+			
+			Color cMoyen = getCouleurMoyenne();
+			
+			for(Carre c : carrePere.getListeCarres()) {
+				rouge = (int) Math.pow(c.getCouleur().getRed() - cMoyen.getRed(),2);
+				vert = (int) Math.pow(c.getCouleur().getGreen() - cMoyen.getGreen(),2);
+				bleu = (int) Math.pow(c.getCouleur().getBlue() - cMoyen.getBlue(),2);
+			}
+			
+			ecartColorimetrique = Math.sqrt((rouge+vert+bleu)/3);
+			
+			return ecartColorimetrique;
+			
+			
+		}else if(estPereDeFeuille()) {
+			
+			double ecartColorimetriqueMoyen = 0;
+			
+			for(Carre c : getListeCarres()) {
+				ecartColorimetriqueMoyen+= c.getEcartColorimetrique();
+			}
+			
+			return ecartColorimetriqueMoyen/4;
+				
+			
+		}
+		
+		return -99999;
+		
 	}
 	
 	

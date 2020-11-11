@@ -27,7 +27,7 @@ public class Quadtree {
 			throw new Exception("L'image n'est pas carré.");
 		}
 		
-		carrePrincipal = new Carre(null,new Position(0,this.largeur,0,this.hauteur));
+		carrePrincipal = new Carre(null,new Position(0,this.largeur,0,this.hauteur),null);
 		
 		generation(carrePrincipal.getPosition(),carrePrincipal);
 		
@@ -48,25 +48,25 @@ public class Quadtree {
 			
 			//carre en haut a gauche
 			Position p1 = new Position(p.getxDepart(),(p.getxArrive()+p.getxDepart())/2,p.getyDepart(),p.getyArrive()/2);
-			Carre carre1 = new Carre(null,p1);
+			Carre carre1 = new Carre(null,p1,c);
 			listeCarres.add(carre1);
 			
 			
 			//carre en haut a droite
 			Position p2 = new Position((p.getxArrive()+p.getxDepart())/2,p.getxArrive(),p.getyDepart(),p.getyArrive()/2);
-			Carre carre2 = new Carre(null,p2);
+			Carre carre2 = new Carre(null,p2,c);
 			listeCarres.add(carre2);
 			
 			
 			//carre en bas a droite
 			Position p3 = new Position((p.getxArrive()+p.getxDepart())/2,p.getxArrive(),(p.getyArrive()+p.getyDepart())/2,p.getyArrive());
-			Carre carre3 = new Carre(null,p3);
+			Carre carre3 = new Carre(null,p3,c);
 			listeCarres.add(carre3);
 			
 			
 			//carre en bas a gauche
 			Position p4 = new Position(p.getxDepart(),(p.getxArrive()+p.getxDepart())/2,(p.getyArrive()+p.getyDepart())/2,p.getyArrive());
-			Carre carre4 = new Carre(null,p4);
+			Carre carre4 = new Carre(null,p4,c);
 			listeCarres.add(carre4);
 			
 			c.setListeCarres(listeCarres);
