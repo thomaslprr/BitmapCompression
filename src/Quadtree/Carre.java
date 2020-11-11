@@ -3,6 +3,8 @@ package Quadtree;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import ImagePng.ImagePNG;
+
 public class Carre {
 	
 	Color couleur;
@@ -48,7 +50,13 @@ public class Carre {
 	}
 	
 	public String toString() {
-		return "Nouveau carré : "+position;
+		
+		if(this.getCouleur()!=null) {
+			return ""+ImagePNG.colorToHex(getCouleur());
+		}
+		
+		return "";
+		
 	}
 	
 	

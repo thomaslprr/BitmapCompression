@@ -34,13 +34,15 @@ public class Quadtree {
 		
 	}
 	
-	public void generation(Position p,Carre c) throws Exception{
+	private void generation(Position p,Carre c) throws Exception{
 		ArrayList<Carre> listeCarres = new ArrayList<>();
 		
-		if(p.getTailleCarre()>=2) {
 
 		
 		if(!zoneEstDeLaMemeCouleur(p)) {
+			
+			if(p.getTailleCarre()>=2) {
+
 			
 			
 			
@@ -82,6 +84,9 @@ public class Quadtree {
 			
 		
 			
+		}else {
+			c.setCouleur(image.getPixel(p.getxDepart(), p.getyDepart()));
+
 		}
 		
 		
@@ -90,18 +95,15 @@ public class Quadtree {
 	
 	public boolean zoneEstDeLaMemeCouleur(Position p) {
 		
-		ArrayList<Color> listeCouleurs = new ArrayList<>();
+		Color c = image.getPixel(p.getxDepart(), p.getyDepart()) ;
 		
 		for(int x = p.getxDepart(); x<p.getxArrive();x++) {
 			for(int y = p.getyDepart(); y< p.getyArrive(); y++) {
-				Color c = image.getPixel(x, y);
-				if(!listeCouleurs.contains(c)) {
-					
-					listeCouleurs.add(c);
-					
-				}else {
+				Color c1 = image.getPixel(x, y);
+				if(!c.equals(c1)) {
 					
 					return false;
+
 					
 				}
 				
@@ -136,7 +138,36 @@ public class Quadtree {
 	
 	public String toString() {
 		
-		return null;
+		return recupererChaine(this.carrePrincipal);
+	}
+	
+	private String recupererChaine(Carre c) {
+		
+		String s = "";
+		
+		
+		if(c.getListeCarres().size()>0) {
+			 s += "";
+
+			
+			s+="(";
+			
+			for(Carre carre : c.getListeCarres()) {
+				
+				s+=" "+carre+ " "+ recupererChaine(carre);
+				
+				
+			}
+			s+=")";
+			
+			
+			
+		}
+		
+		
+		return s;
+		
+		
 	}
 	
 	public ImagePNG toPNG() {
