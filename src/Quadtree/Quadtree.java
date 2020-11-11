@@ -136,11 +136,18 @@ public class Quadtree {
 				
 				if(c.getEcartColorimetrique()<=delta) {
 					
+
+					//on attribue la couleur moyenne au noeud pere
+					c.setCouleur(c.getCouleurMoyenne());
+					
+					//on supprime ses feuilles
 					c.supprimerFeuilles();
+					
 					
 				}
 				
-			}			
+			}	
+			
 			
 		}
 		
@@ -167,7 +174,6 @@ public class Quadtree {
 				getPereDeFeuille(carrePere,c.getListeCarres().get(3));
 			}
 		}
-		
 		
 		return listeCarrePere;
 		

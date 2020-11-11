@@ -32,6 +32,7 @@ public class Carre {
 	
 	
 	
+	
 	public Carre getCarrePere() {
 		return carrePere;
 	}
@@ -69,7 +70,7 @@ public class Carre {
 
 
 
-	private Color getCouleurMoyenne() {
+	public Color getCouleurMoyenne() {
 		
 		if(estFeuille()) {
 			int rougeMoyen = 0 ;
@@ -91,6 +92,11 @@ public class Carre {
 			Color cou = new Color(rougeMoyen,vertMoyen,bleuMoyen);
 			setCouleurMoyenne(cou);
 			return cou;
+			
+		}else if(estPereDeFeuille()) {
+			
+			return getListeCarres().get(0).getCouleurMoyenne();
+			
 			
 		}
 		
@@ -146,6 +152,8 @@ public class Carre {
 					ecartColorimetriqueMax = ecartTmp;
 				}
 			}
+			
+
 			
 			return ecartColorimetriqueMax;
 				
