@@ -117,15 +117,44 @@ public class Quadtree {
 	
 	
 	
-	public void compressDelta(int delta) {
+	public void compressDelta(int delta) throws Exception {
 		
 		if(delta<0 || delta>255) {
-			//lever une exeption 
+			throw new Exception("Le delta doit être compris entre 0 et 255");
 		
 		}
 		
 		
 	}
+	
+	
+	public ArrayList<Carre> getPereDeFeuille(ArrayList<Carre> carrePere, Carre c) {
+		
+		ArrayList<Carre> listeCarrePere = carrePere;
+		
+		if(c.estPereDeFeuille()) {
+			
+			if(!carrePere.contains(c)) {
+				carrePere.add(c);
+			}
+			
+			
+		}else {
+			if(c.getListeCarres().size()==4) {
+				getPereDeFeuille(carrePere,c.getListeCarres().get(0));
+				getPereDeFeuille(carrePere,c.getListeCarres().get(1));
+				getPereDeFeuille(carrePere,c.getListeCarres().get(2));
+				getPereDeFeuille(carrePere,c.getListeCarres().get(3));
+			}
+		}
+		
+		
+		return listeCarrePere;
+		
+		
+	}
+	
+	
 	
 	public void compressPhi(int phi) {
 		

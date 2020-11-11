@@ -42,14 +42,14 @@ public class Carre {
 		this.carrePere = carrePere;
 	}
 	
-	private boolean estFeuille() {
+	public boolean estFeuille() {
 		if(carrePere.getListeCarres().size()==4 && (this.getListeCarres().size() == 0 || this.getListeCarres() ==null) && this.getCouleur()!=null) {
 			return true;
 		}
 		return false;
 	}
 	
-	private boolean estPereDeFeuille() {
+	public boolean estPereDeFeuille() {
 		if(listeCarres.size()==4) {
 			
 			for(Carre c : listeCarres) {
