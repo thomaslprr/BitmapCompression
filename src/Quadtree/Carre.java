@@ -189,6 +189,30 @@ public class Carre {
 		return "";
 		
 	}
+
+
+
+	public void supprimerFeuilles() throws Exception {
+		if(estPereDeFeuille()) {
+			
+			for(Carre c : getListeCarres()) {
+				
+				if(!c.estFeuille()) {
+					
+					throw new Exception("Impossible de supprimer un noeud qui n'est pas une feuille.");
+					
+				}
+				
+				
+			}
+			
+			setListeCarres(new ArrayList<Carre>());
+			
+			
+		}
+		
+		
+	}
 	
 	
 	

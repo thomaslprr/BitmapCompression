@@ -126,6 +126,22 @@ public class Quadtree {
 		if(delta<0 || delta>255) {
 			throw new Exception("Le delta doit être compris entre 0 et 255");
 		
+		}else {
+			
+			ArrayList<Carre> listePereDeFeuille = new ArrayList<>();
+			
+			getPereDeFeuille(listePereDeFeuille,getCarrePrincipal());
+			
+			for(Carre c : listePereDeFeuille) {
+				
+				if(c.getEcartColorimetrique()<=delta) {
+					
+					c.supprimerFeuilles();
+					
+				}
+				
+			}			
+			
 		}
 		
 		

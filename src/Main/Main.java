@@ -16,8 +16,6 @@ public class Main {
 			System.out.println(image.height()+"    "+image.width());
 			Quadtree qt = new Quadtree(image);
 			System.out.println("Voici le quadtree en texte : "+qt);
-			ArrayList<Carre> listec = new ArrayList<>();
-			System.out.println("Voici le nombre de pere de feuille : "+qt.getPereDeFeuille(listec, qt.getCarrePrincipal()).size());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
