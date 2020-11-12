@@ -137,7 +137,6 @@ public class Carre {
 			}
 			
 			ecartColorimetrique = Math.sqrt((rouge+vert+bleu)/3);
-			
 			return ecartColorimetrique;
 			
 			
@@ -148,13 +147,12 @@ public class Carre {
 			for(int i=1; i<4;i++) {
 				double ecartTmp = getListeCarres().get(i).getEcartColorimetrique();
 				if(ecartTmp>ecartColorimetriqueMax) {
-					
 					ecartColorimetriqueMax = ecartTmp;
 				}
 			}
 			
 
-			
+			System.out.println("Ecart colorimétrique du père : "+ecartColorimetriqueMax);
 			return ecartColorimetriqueMax;
 				
 			

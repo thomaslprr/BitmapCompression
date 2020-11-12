@@ -26,7 +26,7 @@ public class Quadtree {
 		this.hauteur= image.height();
 		
 		
-		if(largeur!=hauteur) {
+		if(largeur!=hauteur || largeur%2 !=0) {
 			//lever une exception
 			throw new Exception("L'image n'est pas carré.");
 		}
@@ -133,7 +133,6 @@ public class Quadtree {
 			getPereDeFeuille(listePereDeFeuille,getCarrePrincipal());
 			
 			for(Carre c : listePereDeFeuille) {
-				
 				if(c.getEcartColorimetrique()<=delta) {
 					
 
