@@ -130,11 +130,11 @@ public class Carre {
 			
 			Color cMoyen = getCouleurMoyenne();
 			
-			for(Carre c : carrePere.getListeCarres()) {
-				rouge = (int) Math.pow(c.getCouleur().getRed() - cMoyen.getRed(),2);
-				vert = (int) Math.pow(c.getCouleur().getGreen() - cMoyen.getGreen(),2);
-				bleu = (int) Math.pow(c.getCouleur().getBlue() - cMoyen.getBlue(),2);
-			}
+			
+			rouge = (int) Math.pow(getCouleur().getRed() - cMoyen.getRed(),2);
+			vert = (int) Math.pow(getCouleur().getGreen() - cMoyen.getGreen(),2);
+			bleu = (int) Math.pow(getCouleur().getBlue() - cMoyen.getBlue(),2);
+			
 			
 			ecartColorimetrique = Math.sqrt((rouge+vert+bleu)/3);
 			return ecartColorimetrique;
