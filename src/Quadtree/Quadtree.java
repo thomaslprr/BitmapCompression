@@ -317,11 +317,30 @@ public class Quadtree {
 	
 	public ImagePNG toPNG() {
 		
+		ImagePNG img = image;
 		
+		ArrayList<Carre> feuilles = new ArrayList<Carre>();
 		
+		getFeuilles(feuilles,carrePrincipal);
 		
-		//devra retourner une imagePNG
-		return null;
+		for(Carre c : feuilles) {
+			
+			Position p = c.getPosition();
+			
+			for(int i = p.getxDepart(); i<p.getyArrive();i++) {
+				for(int j = p.getyDepart() ; j<p.getyArrive();j++) {
+					
+					img.setPixel(i,j,c.getCouleur());
+
+				}
+				
+			}
+			
+			
+			
+		}
+		
+		return img;
 	}
 	
 	
