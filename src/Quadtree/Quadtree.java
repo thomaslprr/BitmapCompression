@@ -206,7 +206,7 @@ public class Quadtree {
 	public void compressPhi(int phi) {
 		
 		if(phi<0) {
-			//lever une exeption 
+			throw new Exception("L'indice de compression phi doit être plus grand que 0");
 		
 		}
 		
