@@ -44,7 +44,7 @@ public class Carre {
 	}
 	
 	public boolean estFeuille() {
-		if(carrePere.getListeCarres().size()==4 && (this.getListeCarres().size() == 0 || this.getListeCarres() ==null) && this.getCouleur()!=null) {
+		if((this.getListeCarres().size() == 0 || this.getListeCarres() ==null) && this.getCouleur()!=null) {
 			return true;
 		}
 		return false;

@@ -154,6 +154,28 @@ public class Quadtree {
 	}
 	
 	
+	public ArrayList<Carre> getFeuilles(ArrayList<Carre> listeFeuille, Carre c){
+		
+		ArrayList<Carre> listeFeuilles = listeFeuille;
+		
+		
+		
+		if(c.estFeuille()) {
+			listeFeuilles.add(c);
+		}else {
+			
+			for(Carre ca : c.getListeCarres()) {
+				getFeuilles(listeFeuilles,ca);
+			}
+			
+		}
+		
+		
+		return listeFeuilles;
+		
+	}
+	
+	
 	public ArrayList<Carre> getPereDeFeuille(ArrayList<Carre> carrePere, Carre c) {
 		
 		ArrayList<Carre> listeCarrePere = carrePere;
