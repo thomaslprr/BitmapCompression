@@ -243,10 +243,14 @@ public class Quadtree {
 
 			//il faut supprimer les feuilles en trop tant qu'il y en a en trop
 			//on supprime les feuilles par 4 jusqu'à ce que le nombre de feuille du quadtree passe en dessous de phi.
-			while(nbFeuilles>phi && pereDeFeuille.size()>0) {
+			
+			while(nbFeuilles>phi && pereDeFeuille.size()>0 ) {
+				
+				System.out.println("On est dans le while");
 				
 				Carre pereQuiDevientFeuille = pereDeFeuille.get(0);
 				
+				//la couleur du père prend la couleur moyenne de ses feuilles
 				pereQuiDevientFeuille.setCouleur(pereQuiDevientFeuille.getCouleurMoyenne());
 
 				
@@ -258,8 +262,8 @@ public class Quadtree {
 				pereDeFeuille.remove(pereQuiDevientFeuille);
 				
 				
-				//on décrémente de 4 le nombre de feuille de l'arbre
-				nbFeuilles -=4 ;
+				//on décrémente de 3 le nombre de feuille de l'arbre
+				nbFeuilles -=3 ;
 				
 				
 			
