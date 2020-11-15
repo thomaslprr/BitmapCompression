@@ -203,11 +203,23 @@ public class Quadtree {
 	
 	
 	
-	public void compressPhi(int phi) {
+	public void compressPhi(int phi) throws Exception {
 		
 		if(phi<0) {
 			throw new Exception("L'indice de compression phi doit être plus grand que 0");
 		
+		}else {
+			
+			ArrayList<Carre> listeFeuilles = new ArrayList<>();
+			getFeuilles(listeFeuilles,carrePrincipal);
+			
+			System.out.println("Voici le nb de feuilles : "+ listeFeuilles.size());
+			
+			
+			
+			
+			
+			
 		}
 		
 	}

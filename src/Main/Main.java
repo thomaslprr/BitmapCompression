@@ -18,6 +18,13 @@ public class Main {
 			System.out.println("Voici le quadtree en texte : "+qt+" taille : "+qt.toString().length());
 			qt.compressDelta(128);
 			System.out.println("Voici le quadtree en texte : "+qt+" après compression !  Taille : "+qt.toString().length());
+			
+			
+			Quadtree qt2 = new Quadtree(image);
+			qt2.compressPhi(4);
+			System.out.println("Voici le quadtree en texte : "+qt2+" après compression !  Taille : "+qt.toString().length());
+
+
 
 			
 			
