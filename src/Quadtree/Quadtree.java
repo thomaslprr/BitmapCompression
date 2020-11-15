@@ -1,6 +1,7 @@
 package Quadtree;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -103,6 +104,7 @@ public class Quadtree {
 		
 		Color c = image.getPixel(p.getxDepart(), p.getyDepart()) ;
 		
+		
 		for(int x = p.getxDepart(); x<p.getxArrive();x++) {
 			for(int y = p.getyDepart(); y< p.getyArrive(); y++) {
 				Color c1 = image.getPixel(x, y);
@@ -118,7 +120,7 @@ public class Quadtree {
 		
 		
 		return true;
-	}
+		}
 	
 	
 	
@@ -325,9 +327,10 @@ public class Quadtree {
 		
 		for(Carre c : feuilles) {
 			
+			
 			Position p = c.getPosition();
 			
-			for(int i = p.getxDepart(); i<p.getyArrive();i++) {
+			for(int i = p.getxDepart(); i<p.getxArrive();i++) {
 				for(int j = p.getyDepart() ; j<p.getyArrive();j++) {
 					
 					img.setPixel(i,j,c.getCouleur());
@@ -341,6 +344,10 @@ public class Quadtree {
 		}
 		
 		return img;
+	}
+	
+	public void exporterImage(String nomDuFichier) throws IOException {
+		this.toPNG().save(nomDuFichier);
 	}
 	
 	

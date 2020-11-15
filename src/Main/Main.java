@@ -12,17 +12,15 @@ public class Main {
 	public static void main(String[] args) {
 
 		try {
-			ImagePNG image = new ImagePNG("images/i.png");
-			System.out.println(image.height()+"    "+image.width());
+			ImagePNG image = new ImagePNG("images/16.png");
+			
+			
+			
 			Quadtree qt = new Quadtree(image);
-			System.out.println("Voici le quadtree en texte : "+qt+" taille : "+qt.toString().length());
-			qt.compressDelta(128);
-			System.out.println("Voici le quadtree en texte : "+qt+" après compression !  Taille : "+qt.toString().length());
-			
-			
-			Quadtree qt2 = new Quadtree(image);
-			qt2.compressPhi(4);
-			System.out.println("Voici le quadtree en texte : "+qt2+" après compression !  Taille : "+qt2.toString().length());
+			System.out.println("avant compression" + qt.toString());
+			qt.compressPhi(4);
+			System.out.println("apres compression" + qt.toString());
+			qt.exporterImage("test.png");
 			
 			
 		} catch (Exception e) {
