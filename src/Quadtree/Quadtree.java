@@ -207,49 +207,63 @@ public class Quadtree {
 	
 	public void compressPhi(int phi) throws Exception {
 		
-		if(phi<0) {
+		if(phi<=0) {
 			throw new Exception("L'indice de compression phi doit être plus grand que 0");
 		
 		}else {
 			
+			//on récupère toutes les feuilles de l'arbre
 			ArrayList<Carre> listeFeuilles = new ArrayList<>();
 			getFeuilles(listeFeuilles,carrePrincipal);
 			
 			int nbFeuilles = listeFeuilles.size();
 			
-			//si le nombre de feuille dans l'arbre est plus grand que celui autorisé
-			if(nbFeuilles>phi) {
-				//il faut supprimer les feuilles en trop
-				
-				
-				//on trie les pères de feuille par valeur croissante d'écart colorimétrique
-				ArrayList<Carre> pereDeFeuille= new ArrayList<>();
-				getPereDeFeuille(pereDeFeuille,carrePrincipal);
-				
-				Comparator<Carre> comparerParEcartColorimetrique = new Comparator<Carre>(){
+			
+			//création d'un comparateur d'écart colorimétrique
+			Comparator<Carre> comparerParEcartColorimetrique = new Comparator<Carre>(){
 
-					@Override
-					public int compare(Carre c1, Carre c2) {
-						
-						return c1.compareTo(c2);
-					}
+				@Override
+				public int compare(Carre c1, Carre c2) {
 					
-				};
+					return c1.compareTo(c2);
+				}
+				
+			};
+			
+			
+			
+			ArrayList<Carre> pereDeFeuille= new ArrayList<>();
+			
+			getPereDeFeuille(pereDeFeuille,carrePrincipal);
+			
+			//on trie les pères de feuille par valeur croissante d'écart colorimétrique
+			Collections.sort(pereDeFeuille, comparerParEcartColorimetrique);
+			
+			
+
+			//il faut supprimer les feuilles en trop tant qu'il y en a en trop
+			//on supprime les feuilles par 4 jusqu'à ce que le nombre de feuille du quadtree passe en dessous de phi.
+			while(nbFeuilles>phi && pereDeFeuille.size()>0) {
+				
+				Carre pereQuiDevientFeuille = pereDeFeuille.get(0);
+				
+				pereQuiDevientFeuille.setCouleur(pereQuiDevientFeuille.getCouleurMoyenne());
+
+				
+				//on supprime les 4 feuilles, le noeud devient ainsi une feuille
+				pereQuiDevientFeuille.supprimerFeuilles();
+
+				
+				//on supprime le père devenu feuille de la liste des pères
+				pereDeFeuille.remove(pereQuiDevientFeuille);
 				
 				
-				Collections.sort(pereDeFeuille, comparerParEcartColorimetrique);
+				//on décrémente de 4 le nombre de feuille de l'arbre
+				nbFeuilles -=4 ;
 				
 				
-				
-				
-				
-				
-				
-				//on supprime les feuilles par 4 jusqu'à ce que le nombre de feuille du quadtree passe en dessous de phi.
-				
-				
-				
-				
+			
+			}
 				
 				
 				
@@ -261,7 +275,7 @@ public class Quadtree {
 			
 		}
 		
-	}
+	
 	
 	public String toString() {
 		
