@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import ImagePng.ImagePNG;
 
-public class Carre {
+public class Carre implements Comparable<Carre>  {
 	
 	Color couleur;
 	Position position;
@@ -67,6 +67,8 @@ public class Carre {
 		
 		return false;
 	}
+	
+	
 
 
 
@@ -218,6 +220,22 @@ public class Carre {
 		}
 		
 		
+	}
+
+
+
+
+	@Override
+	public int compareTo(Carre c) {
+		
+		
+		if(this.getEcartColorimetrique()>c.getEcartColorimetrique()) {
+			return 1;
+		}else if(this.getEcartColorimetrique() == c.getEcartColorimetrique()) {
+			return 0;
+		}else {
+			return -1;
+		}
 	}
 	
 	

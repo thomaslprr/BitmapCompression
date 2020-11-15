@@ -12,7 +12,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		try {
-			ImagePNG image = new ImagePNG("images/i.png");
+			ImagePNG image = new ImagePNG("images/1024-cube.png");
 			System.out.println(image.height()+"    "+image.width());
 			Quadtree qt = new Quadtree(image);
 			System.out.println("Voici le quadtree en texte : "+qt+" taille : "+qt.toString().length());
