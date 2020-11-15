@@ -21,11 +21,8 @@ public class Main {
 			
 			
 			Quadtree qt2 = new Quadtree(image);
-			qt2.compressPhi(10);
+			qt2.compressPhi(8);
 			System.out.println("Voici le quadtree en texte : "+qt2+" après compression !  Taille : "+qt2.toString().length());
-
-
-
 			
 			
 		} catch (Exception e) {

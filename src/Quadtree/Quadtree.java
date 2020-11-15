@@ -246,7 +246,6 @@ public class Quadtree {
 			
 			while(nbFeuilles>phi && pereDeFeuille.size()>0 ) {
 				
-				System.out.println("On est dans le while");
 				
 				Carre pereQuiDevientFeuille = pereDeFeuille.get(0);
 				
