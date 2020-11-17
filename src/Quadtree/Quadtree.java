@@ -48,19 +48,19 @@ public class Quadtree {
 		
 		if(!zoneEstDeLaMemeCouleur(p)) {
 			
+			
 			if(p.getTailleCarre()>=2) {
 
 			
 			
-			
 			//carre en haut a gauche
-			Position p1 = new Position(p.getxDepart(),(p.getxArrive()+p.getxDepart())/2,p.getyDepart(),p.getyArrive()/2);
+			Position p1 = new Position(p.getxDepart(),(p.getxArrive()+p.getxDepart())/2,p.getyDepart(),(p.getyArrive()+p.getyDepart())/2);
 			Carre carre1 = new Carre(null,p1,c);
 			listeCarres.add(carre1);
 			
 			
 			//carre en haut a droite
-			Position p2 = new Position((p.getxArrive()+p.getxDepart())/2,p.getxArrive(),p.getyDepart(),p.getyArrive()/2);
+			Position p2 = new Position((p.getxArrive()+p.getxDepart())/2,p.getxArrive(),p.getyDepart(),(p.getyArrive()+p.getyDepart())/2);
 			Carre carre2 = new Carre(null,p2,c);
 			listeCarres.add(carre2);
 			
@@ -93,6 +93,7 @@ public class Quadtree {
 			
 		}else {
 			c.setCouleur(image.getPixel(p.getxDepart(), p.getyDepart()));
+			
 
 		}
 		
