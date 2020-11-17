@@ -12,8 +12,8 @@ public class Position {
 	
 	
 	public Position(int xDepart, int xArrive, int yDepart, int yArrive) throws Exception {
-		if(yDepart==yArrive) {
-			throw new Exception("probleme coordonnée Y : POSITION Y"+yDepart );
+		if(yDepart==yArrive || xDepart == xArrive) {
+			throw new Exception("Problème de coordonnée");
 		}
 		this.xDepart = xDepart;
 		this.xArrive = xArrive;

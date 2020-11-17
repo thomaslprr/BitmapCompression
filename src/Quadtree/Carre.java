@@ -154,7 +154,6 @@ public class Carre implements Comparable<Carre>  {
 			}
 			
 
-			//System.out.println("Ecart colorimétrique du père : "+ecartColorimetriqueMax);
 			return ecartColorimetriqueMax;
 				
 			

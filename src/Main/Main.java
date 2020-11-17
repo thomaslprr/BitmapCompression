@@ -17,15 +17,12 @@ public class Main {
 			
 			
 			Quadtree qt = new Quadtree(image);
-			System.out.println("avant compression" + qt.toString());
-			qt.compressPhi(20);
-			System.out.println("apres compression" + qt.toString());
-			
+			qt.compressPhi(15000);
+			qt.exporterTexte("phi15.txt");
 			qt.exporterImage("test.png");
 			
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

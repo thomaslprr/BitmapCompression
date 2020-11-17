@@ -1,6 +1,7 @@
 package Quadtree;
 
 import java.awt.Color;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,7 +45,6 @@ public class Quadtree {
 	private void generation(Position p,Carre c) throws Exception{
 		ArrayList<Carre> listeCarres = new ArrayList<>();
 		
-
 		
 		if(!zoneEstDeLaMemeCouleur(p)) {
 			
@@ -354,6 +354,18 @@ public class Quadtree {
 		}
 		
 		return img;
+	}
+	
+	public void exporterTexte(String nomDuFichier) {
+		try {
+			FileWriter fw;
+			fw = new FileWriter(nomDuFichier);
+			fw.write(this.toString());
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		 
 	}
 	
 	public void exporterImage(String nomDuFichier) throws IOException {
