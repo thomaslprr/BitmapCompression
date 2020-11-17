@@ -266,6 +266,7 @@ public class Quadtree {
 				
 				Carre pereNouvelleFeuille = pereQuiDevientFeuille.getCarrePere();
 				
+				
 				if(pereNouvelleFeuille.estPereDeFeuille()) {
 					pereDeFeuille.add(pereNouvelleFeuille);	
 				}

@@ -18,8 +18,14 @@ public class Main {
 			
 			Quadtree qt = new Quadtree(image);
 			System.out.println("avant compression" + qt.toString());
-			qt.compressPhi(4);
+			qt.compressPhi(20);
 			System.out.println("apres compression" + qt.toString());
+			ArrayList<Carre> listeCarre = new ArrayList<>();
+			qt.getFeuilles(listeCarre, qt.getCarrePrincipal());
+			for(Carre feuille: listeCarre) {
+				System.out.println(feuille+ "   "+feuille.getPosition());
+				
+			}
 			qt.exporterImage("test.png");
 			
 			

@@ -11,7 +11,10 @@ public class Position {
 	
 	
 	
-	public Position(int xDepart, int xArrive, int yDepart, int yArrive) {
+	public Position(int xDepart, int xArrive, int yDepart, int yArrive) throws Exception {
+		if(this.yDepart+Math.abs(xDepart-xArrive)>yArrive+10 ||this.yDepart+Math.abs(xDepart-xArrive)>yArrive-10) {
+			throw new Exception("probleme coordonnée Y");
+		}
 		this.xDepart = xDepart;
 		this.xArrive = xArrive;
 		this.yDepart = yDepart;
