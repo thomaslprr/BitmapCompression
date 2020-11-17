@@ -12,7 +12,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		try {
-			ImagePNG image = new ImagePNG("images/16.png");
+			ImagePNG image = new ImagePNG("images/1024-cube.png");
 			
 			
 			

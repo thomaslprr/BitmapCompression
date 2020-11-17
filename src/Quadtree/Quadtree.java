@@ -236,6 +236,8 @@ public class Quadtree {
 			
 			ArrayList<Carre> pereDeFeuille= new ArrayList<>();
 			
+			
+			
 			getPereDeFeuille(pereDeFeuille,carrePrincipal);
 			
 			//on trie les pères de feuille par valeur croissante d'écart colorimétrique
@@ -261,6 +263,12 @@ public class Quadtree {
 				
 				//on supprime le père devenu feuille de la liste des pères
 				pereDeFeuille.remove(pereQuiDevientFeuille);
+				
+				Carre pereNouvelleFeuille = pereQuiDevientFeuille.getCarrePere();
+				
+				if(pereNouvelleFeuille.estPereDeFeuille()) {
+					pereDeFeuille.add(pereNouvelleFeuille);	
+				}
 				
 				
 				//on décrémente de 3 le nombre de feuille de l'arbre
