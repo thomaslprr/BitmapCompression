@@ -21,7 +21,6 @@ public class ThreadCompression extends Thread implements Runnable {
 		if(typeCompression==0) {
 			
 			try {
-				System.out.println("Je fais la compression delta : "+valCompression);
 				qt.compressDelta(valCompression);
 				qt.exporterTexte("delta"+valCompression+".txt");
 				qt.exporterImage("delta"+valCompression+".png");
