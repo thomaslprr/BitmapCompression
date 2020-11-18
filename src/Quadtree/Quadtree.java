@@ -267,10 +267,19 @@ public class Quadtree {
 				
 				Carre pereNouvelleFeuille = pereQuiDevientFeuille.getCarrePere();
 				
-				
-				if(pereNouvelleFeuille.estPereDeFeuille()) {
-					pereDeFeuille.add(pereNouvelleFeuille);	
+				if(nbFeuilles-3<4) {
+					pereDeFeuille.add(this.getCarrePrincipal());
+					
+				}else {
+					if(pereNouvelleFeuille.estPereDeFeuille()) {
+						pereDeFeuille.add(pereNouvelleFeuille);	
+					}
 				}
+				
+				
+				
+				
+				
 				
 				
 				//on décrémente de 3 le nombre de feuille de l'arbre

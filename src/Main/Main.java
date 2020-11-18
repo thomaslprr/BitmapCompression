@@ -8,6 +8,18 @@ import Quadtree.Quadtree;
 public class Main {
 
 	public static void main(String[] args) throws Exception {
+		
+		/**
+		ImagePNG image= new ImagePNG("images/1024-cube.png");
+		
+		Quadtree qt = new Quadtree(image);
+		
+		qt.compressPhi(1);
+		
+		qt.exporterImage("test.png");
+		*/
+		
+		
 		if(args.length!=3) {
 			throw new Exception("Paramètres incorrects.");
 		}
