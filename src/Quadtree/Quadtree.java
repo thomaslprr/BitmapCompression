@@ -277,11 +277,6 @@ public class Quadtree {
 				}
 				
 				
-				
-				
-				
-				
-				
 				//on décrémente de 3 le nombre de feuille de l'arbre
 				nbFeuilles -=3 ;
 				

@@ -9,11 +9,13 @@ public class ThreadCompression extends Thread implements Runnable {
 	Quadtree qt;
 	int typeCompression;
 	int valCompression;
+	String nom;
 	
-	public ThreadCompression(Quadtree quadtree, int typeCompression ,int valCompression) {
+	public ThreadCompression(Quadtree quadtree, int typeCompression ,int valCompression,String nom) {
 		this.qt = quadtree;
 		this.typeCompression = typeCompression;
 		this.valCompression = valCompression;
+		this.nom = nom;
 	}
 
 	@Override
@@ -21,9 +23,15 @@ public class ThreadCompression extends Thread implements Runnable {
 		if(typeCompression==0) {
 			
 			try {
+				System.out.println("----> LANCEMENT COMPRESSION DELTA ("+valCompression+")");
 				qt.compressDelta(valCompression);
-				qt.exporterTexte("delta"+valCompression+".txt");
-				qt.exporterImage("delta"+valCompression+".png");
+				System.out.println("	-- COMPRESSION REUSSIE");
+				qt.exporterTexte(nom+"-delta"+valCompression+".txt");
+				System.out.println("	-- EXPORT TEXTE REUSSI");
+				qt.exporterImage(nom+"-delta"+valCompression+".png");
+				System.out.println("	-- EXPORT PNG REUSSI");
+
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -31,9 +39,13 @@ public class ThreadCompression extends Thread implements Runnable {
 		}else if (typeCompression==1) {
 			
 			try {
+				System.out.println("----> LANCEMENT COMPRESSION PHI ("+valCompression+")");
 				qt.compressPhi(valCompression);
-				qt.exporterTexte("phi"+valCompression+".txt");
-				qt.exporterImage("phi"+valCompression+".png");
+				System.out.println("	-- COMPRESSION REUSSI");
+				qt.exporterTexte(nom+"-phi"+valCompression+".txt");
+				System.out.println("	-- EXPORT TEXTE REUSSI");
+				qt.exporterImage(nom+"-phi"+valCompression+".png");
+				System.out.println("	-- EXPORT PNG REUSSI");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -45,6 +57,7 @@ public class ThreadCompression extends Thread implements Runnable {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+
 		}
 
 	}

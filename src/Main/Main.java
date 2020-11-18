@@ -49,12 +49,27 @@ public class Main {
 			}
 		}
 		
+		String nom = "";
+		if(imageACompresser.length()>4) {
+			if(!imageACompresser.substring(imageACompresser.length() - 4).equals(".png")) {
+				throw new Exception("Le fichier source à compresser doit être écrit sous la forme \"nomdufichier.png\" ou \"dossiersource/.../nomdufichier.png\"");
+			}else {
+				nom=imageACompresser.substring(0,imageACompresser.length() - 4);
+				String val[] = nom.split("/");
+				nom = val[val.length-1];
+			}
+		}
+		
+		
 		
 
 			if(aTousLesArguments) {
 				
-				ImagePNG image = new ImagePNG(imageACompresser);
+				System.out.println("////// LANCEMENT COMPRESSION \\\\\\");
 				
+				ImagePNG image = new ImagePNG(imageACompresser);
+				System.out.println("----> IMAGE TROUVEE AVEC SUCCES");
+
 				
 				
 				Quadtree qt = new Quadtree(image);
@@ -62,13 +77,13 @@ public class Main {
 				Quadtree qtPhi = qt;
 				
 				
-				ThreadCompression threadDelta = new ThreadCompression(qtDelta,0,delta);
-				ThreadCompression threadPhi = new ThreadCompression(qtPhi,1,phi);
+				ThreadCompression threadDelta = new ThreadCompression(qtDelta,0,delta,nom);
+				ThreadCompression threadPhi = new ThreadCompression(qtPhi,1,phi,nom);
 				
 				threadDelta.run();
 				threadPhi.run();
 				
-
+				
 					
 				
 
@@ -79,7 +94,8 @@ public class Main {
 			}
 			
 			
-			
+			System.out.println("////// FIN DU PROGRAMME \\\\\\");
+
 		
 		
 		
