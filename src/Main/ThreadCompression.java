@@ -30,7 +30,6 @@ public class ThreadCompression extends Thread implements Runnable {
 		if(typeCompression==0) {
 			
 			try {
-				ImagePNG image = qt.getImage();
 				System.out.println("----> LANCEMENT COMPRESSION DELTA ("+valCompression+")");
 				qt.compressDelta(valCompression);
 				System.out.println("	-- COMPRESSION REUSSIE");
@@ -39,8 +38,8 @@ public class ThreadCompression extends Thread implements Runnable {
 				qt.exporterImage(nom+"-delta"+valCompression+".png");
 				System.out.println("	-- EXPORT PNG REUSSI");
 				
-				ImagePNG imageCopie = qt.getImage();
-				double EQMDelta = ImagePNG.computeEQM(image, imageCopie);
+				ImagePNG imageBase = new ImagePNG(adresseFichier);
+				double EQMDelta = ImagePNG.computeEQM(imageBase, qt.toPNG());
 				
 				  // chargement des fichiers
 	            File fic = new File(adresseFichier);
@@ -62,7 +61,6 @@ public class ThreadCompression extends Thread implements Runnable {
 		else if (typeCompression==1) {
 			
 			try {
-				ImagePNG image = qt.getImage();
 				System.out.println("----> LANCEMENT COMPRESSION PHI ("+valCompression+")");
 				qt.compressPhi(valCompression);
 				System.out.println("	-- COMPRESSION REUSSI");
@@ -71,8 +69,8 @@ public class ThreadCompression extends Thread implements Runnable {
 				qt.exporterImage(nom+"-phi"+valCompression+".png");
 				System.out.println("	-- EXPORT PNG REUSSI");
 				
-				ImagePNG imageCopie = qt.getImage();
-				double EQMPhi = ImagePNG.computeEQM(image, imageCopie);
+				ImagePNG imageBase = new ImagePNG(adresseFichier);
+				double EQMPhi = ImagePNG.computeEQM(imageBase, qt.toPNG());
 				
 				  // chargement des fichiers
 	            File fic = new File(adresseFichier);

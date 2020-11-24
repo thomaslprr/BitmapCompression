@@ -44,9 +44,6 @@ public class Quadtree {
 		
 	}
 	
-	public ImagePNG getImage() {
-		return image;
-	}
 	
 	private void generation(Position p,Carre c) throws Exception{
 		ArrayList<Carre> listeCarres = new ArrayList<>();
@@ -364,9 +361,7 @@ public class Quadtree {
 			
 			
 		}
-		
-		this.image = img;
-		
+				
 		return img;
 	}
 	

@@ -9,20 +9,6 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 		
-		/**
-		ImagePNG image= new ImagePNG("images/1024-cube.png");
-		
-		Quadtree qt = new Quadtree(image);
-		
-		qt.compressPhi(20);
-		
-		qt.exporterImage("test.png");
-		
-		ImagePNG image2 = qt.toPNG();
-		
-		System.out.println("QUALITE : "+ImagePNG.computeEQM(image, image2));
-		*/
-		
 		
 		
 		if(args.length!=3) {
