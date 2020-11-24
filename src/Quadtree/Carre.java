@@ -144,6 +144,7 @@ public class Carre implements Comparable<Carre>  {
 			
 		}else if(estPereDeFeuille()) {
 			
+			
 			double ecartColorimetriqueMax = getListeCarres().get(0).getEcartColorimetrique();
 			
 			for(int i=1; i<4;i++) {
@@ -154,12 +155,16 @@ public class Carre implements Comparable<Carre>  {
 			}
 			
 
+			System.out.println("Voici l'écart colorimétrique : "+ecartColorimetriqueMax);
+
 			return ecartColorimetriqueMax;
 				
 			
 		}
 		
-		return -99999;
+		return -999999;
+		
+		
 		
 	}
 	

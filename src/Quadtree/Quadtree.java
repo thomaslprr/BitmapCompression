@@ -140,21 +140,38 @@ public class Quadtree {
 			
 			getPereDeFeuille(listePereDeFeuille,getCarrePrincipal());
 			
-			for(Carre c : listePereDeFeuille) {
-				if(c.getEcartColorimetrique()<=delta) {
+			
+			while(listePereDeFeuille.size()>0) {
+				
+				Carre c = listePereDeFeuille.get(0);
+				
+					if(c.getEcartColorimetrique()<=delta) {
 					
 
-					//on attribue la couleur moyenne au noeud pere
-					c.setCouleur(c.getCouleurMoyenne());
+						//on attribue la couleur moyenne au noeud pere
+						c.setCouleur(c.getCouleurMoyenne());
 					
-					//on supprime ses feuilles
-					c.supprimerFeuilles();
+						//on supprime ses feuilles
+						c.supprimerFeuilles();
+						
+						
+						if(c.getCarrePere()!=null && c.getCarrePere().estPereDeFeuille()) {
+							listePereDeFeuille.add(c.getCarrePere());
+						}
+						
+						
 					
 					
-				}
+					}
+					
+					//on le supprime de la liste
+					listePereDeFeuille.remove(c);
+									
 				
-			}	
+				
+			}
 			
+				
 			
 		}
 		
@@ -272,12 +289,10 @@ public class Quadtree {
 				
 				if(nbFeuilles-3<4) {
 					pereDeFeuille.add(this.getCarrePrincipal());
-					//Collections.sort(pereDeFeuille, comparerParEcartColorimetrique);
 					
 				}else {
 					if(pereNouvelleFeuille.estPereDeFeuille()) {
 						pereDeFeuille.add(pereNouvelleFeuille);	
-						//Collections.sort(pereDeFeuille, comparerParEcartColorimetrique);
 					}
 				}
 				
@@ -285,7 +300,7 @@ public class Quadtree {
 				//on décrémente de 3 le nombre de feuille de l'arbre
 				nbFeuilles -=3 ;
 				
-				
+
 			
 			}
 				

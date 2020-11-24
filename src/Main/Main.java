@@ -2,12 +2,25 @@ package Main;
 
 
 
+import java.awt.Color;
+import java.util.ArrayList;
+
 import ImagePng.ImagePNG;
+import Quadtree.Carre;
+import Quadtree.Position;
 import Quadtree.Quadtree;
 
 public class Main {
 
 	public static void main(String[] args) throws Exception {
+		
+		/**
+		ImagePNG image = new ImagePNG("images/i.png");
+		
+		Quadtree qt = new Quadtree(image);
+		qt.compressDelta(10);
+		qt.exporterImage("test3.png");
+		*/
 		
 		
 		
@@ -87,7 +100,7 @@ public class Main {
 			
 			
 			System.out.println("////// FIN DU PROGRAMME \\\\\\");
-
+		
 		
 		
 		
