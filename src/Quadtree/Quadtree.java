@@ -28,6 +28,8 @@ public class Quadtree {
 		this.image = image;
 		this.largeur=image.width();
 		this.hauteur= image.height();
+				
+		
 		
 		
 		if(largeur!=hauteur || largeur%2 !=0) {
@@ -40,6 +42,10 @@ public class Quadtree {
 		generation(carrePrincipal.getPosition(),carrePrincipal);
 		
 		
+	}
+	
+	public ImagePNG getImage() {
+		return image;
 	}
 	
 	private void generation(Position p,Carre c) throws Exception{
@@ -269,10 +275,12 @@ public class Quadtree {
 				
 				if(nbFeuilles-3<4) {
 					pereDeFeuille.add(this.getCarrePrincipal());
+					//Collections.sort(pereDeFeuille, comparerParEcartColorimetrique);
 					
 				}else {
 					if(pereNouvelleFeuille.estPereDeFeuille()) {
 						pereDeFeuille.add(pereNouvelleFeuille);	
+						//Collections.sort(pereDeFeuille, comparerParEcartColorimetrique);
 					}
 				}
 				
@@ -357,6 +365,8 @@ public class Quadtree {
 			
 		}
 		
+		this.image = img;
+		
 		return img;
 	}
 	
@@ -375,6 +385,8 @@ public class Quadtree {
 	public void exporterImage(String nomDuFichier) throws IOException {
 		this.toPNG().save(nomDuFichier);
 	}
+	
+	
 	
 	
 }

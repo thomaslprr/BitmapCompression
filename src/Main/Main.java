@@ -14,10 +14,15 @@ public class Main {
 		
 		Quadtree qt = new Quadtree(image);
 		
-		qt.compressPhi(1);
+		qt.compressPhi(20);
 		
 		qt.exporterImage("test.png");
+		
+		ImagePNG image2 = qt.toPNG();
+		
+		System.out.println("QUALITE : "+ImagePNG.computeEQM(image, image2));
 		*/
+		
 		
 		
 		if(args.length!=3) {
@@ -62,10 +67,11 @@ public class Main {
 		
 		
 		
+		System.out.println("////// LANCEMENT COMPRESSION \\\\\\");
+
 
 			if(aTousLesArguments) {
 				
-				System.out.println("////// LANCEMENT COMPRESSION \\\\\\");
 				
 				ImagePNG image = new ImagePNG(imageACompresser);
 				System.out.println("----> IMAGE TROUVEE AVEC SUCCES");
@@ -77,8 +83,8 @@ public class Main {
 				Quadtree qtPhi = qt;
 				
 				
-				ThreadCompression threadDelta = new ThreadCompression(qtDelta,0,delta,nom);
-				ThreadCompression threadPhi = new ThreadCompression(qtPhi,1,phi,nom);
+				ThreadCompression threadDelta = new ThreadCompression(qtDelta,0,delta,nom,imageACompresser);
+				ThreadCompression threadPhi = new ThreadCompression(qtPhi,1,phi,nom,imageACompresser);
 				
 				threadDelta.run();
 				threadPhi.run();
