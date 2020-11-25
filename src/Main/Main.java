@@ -14,15 +14,15 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 		
-		/**
-		ImagePNG image = new ImagePNG("images/i.png");
+		
+		ImagePNG image = new ImagePNG("images/1024-cube.png");
 		
 		Quadtree qt = new Quadtree(image);
-		qt.compressDelta(10);
+		qt.compressDelta(100);
 		qt.exporterImage("test3.png");
-		*/
 		
 		
+		/**
 		
 		if(args.length!=3) {
 			throw new Exception("Paramètres incorrects.");
@@ -101,7 +101,7 @@ public class Main {
 			
 			System.out.println("////// FIN DU PROGRAMME \\\\\\");
 		
-		
+		*/
 		
 		
 	}
