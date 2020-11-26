@@ -380,7 +380,10 @@ public class Quadtree {
 		return img;
 	}
 	
-	public void exporterTexte(String nomDuFichier) {
+	public void exporterTexte(String nomDuFichier) throws Exception {
+		if(nomDuFichier.equals(".txt")) {
+			throw new Exception("Le nom du fichier ne peut pas être vide.");
+		}
 		try {
 			FileWriter fw;
 			fw = new FileWriter(nomDuFichier);
@@ -392,7 +395,10 @@ public class Quadtree {
 		 
 	}
 	
-	public void exporterImage(String nomDuFichier) throws IOException {
+	public void exporterImage(String nomDuFichier) throws Exception {
+		if(nomDuFichier.equals(".png")) {
+			throw new Exception("Le nom du fichier ne peut pas être vide.");
+		}
 		this.toPNG().save(nomDuFichier);
 	}
 	

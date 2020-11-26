@@ -3,6 +3,7 @@ package Main;
 
 
 import java.awt.Color;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -13,6 +14,8 @@ import Quadtree.Position;
 import Quadtree.Quadtree;
 
 public class Main {
+	
+	public static boolean aDejaCompresse = false;
 
 	public static void main(String[] args) throws Exception {
 		
@@ -137,13 +140,13 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		
 		
-		System.out.println("Tapez : ");
 		System.out.println("1: Charger une image PNG en mémoire dans un quadtree");
 		System.out.println("2: Effectuer une compression Delta");
 		System.out.println("3: Effectuer une compression Phi");
 		System.out.println("4: Sauvegarder le quadtree dans un fichier PNG");
 		System.out.println("5: Sauvegarder le quadtree dans un fichier TXT");
 		System.out.println("6: Donner les mesures comparatives de deux images PNG");
+		System.out.println("7: Quitter l'application");
 		
 		int numAction = -1;
 		
@@ -151,7 +154,7 @@ public class Main {
 			numAction = sc.nextInt();
 			
 			
-		}while(numAction<1 || numAction>6 );
+		}while(numAction<1 || numAction>7 );
 			
 		effectuerAction(numAction,imageInitiale,image,original,delta,phi);
 
@@ -190,14 +193,26 @@ public class Main {
 				break;
 			case 2:
 				if(original!=null) {
+					
+					if(aDejaCompresse) {
+						System.out.println("Vous avez déjà compressé l'image. Veuillez importer une autre image. "
+								+ "\n Pensez à exporter l'image déjà compressé pour ne pas la perdre.");
+						afficherLesOptions(imageInitiale, image,original,delta,phi);
+					}else {
 					System.out.println("Quelle est la valeur de compression Delta que vous voulez appliquer sur l'image chargée ?");
 					try {
-						delta=new Quadtree(image);
-						delta.compressDelta(sc.nextInt());
+						int valCompress = sc.nextInt();
+						System.out.println("Compression en cours...");
+						original.compressDelta(valCompress);
+						aDejaCompresse = true;
+						System.out.println("Compression effectuée.");
+						afficherLesOptions(imageInitiale, image,original,delta,phi);
+
 					} catch (Exception e) {
 						System.out.println(e.getMessage().toString());
 						afficherLesOptions(imageInitiale, image,original,delta,phi);
 						
+					}
 					}
 				}else {
 					System.out.println("Aucune image n'est chargée, veuillez en charger une.");
@@ -205,14 +220,120 @@ public class Main {
 				}
 				break;
 			case 3:
+				if(original!=null) {
+					if(aDejaCompresse) {
+						System.out.println("Vous avez déjà compressé l'image. Veuillez importer une autre image. "
+								+ "\n Pensez à exporter l'image déjà compressé pour ne pas la perdre.");
+						afficherLesOptions(imageInitiale, image,original,delta,phi);
+					}else {
+					System.out.println("Quelle est la valeur de compression Phi que vous voulez appliquer sur l'image chargée ?");
+					try {
+						int valCompress = sc.nextInt();
+						System.out.println("Compression en cours...");
+						original.compressPhi(valCompress);
+						aDejaCompresse = true;
+						System.out.println("Compression effectuée.");
+						afficherLesOptions(imageInitiale, image,original,delta,phi);
+
+						
+					} catch (Exception e) {
+						System.out.println(e.getMessage().toString());
+						afficherLesOptions(imageInitiale, image,original,delta,phi);
+						
+					}
+					}
+				}else {
+					System.out.println("Aucune image n'est chargée, veuillez en charger une.");
+					afficherLesOptions(imageInitiale, image,original,delta,phi);
+				}
 				break;
 			case 4:
+				if(original!=null) {
+					if(!aDejaCompresse) {
+						System.out.println("Vous n'avez apporté aucune modification sur l'image d'origine.");
+					}
+					try {
+						System.out.println("Veuillez saisir le nom que vous voulez donner au fichier (sans l'extansion .png)");
+						original.exporterImage(sc.nextLine()+".png");
+						System.out.println("Image PNG exportée.");
+						afficherLesOptions(imageInitiale, image,original,delta,phi);
+
+
+						
+					} catch (Exception e) {
+						System.out.println("Impossible d'exporter le quadtree en PNG");
+					}
+				}
+				else {
+					System.out.println("Aucune image n'est chargée, veuillez en charger une.");
+					afficherLesOptions(imageInitiale, image,original,delta,phi);
+				
+				}
 				break;
 			case 5:
+				if(original!=null) {
+					try {
+						System.out.println("Veuillez saisir le nom que vous voulez donner au fichier (sans l'extansion .txt)");
+						original.exporterImage(sc.nextLine()+".txt");
+						System.out.println("Fichier texte exporté.");
+						afficherLesOptions(imageInitiale, image,original,delta,phi);
+					} catch (Exception e) {
+						System.out.println("Impossible d'exporter le quadtree en TXT");
+					}
+				}
+				else {
+					System.out.println("Aucune image n'est chargée, veuillez en charger une.");
+					afficherLesOptions(imageInitiale, image,original,delta,phi);
+				
+				}
 				break;
 			case 6:
+				
+				
+					
+					File fichier1 = null;
+					File fichier2 = null;
+					ImagePNG image1 = null;
+					ImagePNG image2 = null;
+
+					
+					
+					
+					
+					try {
+						System.out.println("Saisissez l'adresse de la première image.");
+						String adresse = sc.nextLine();
+						image1 = new ImagePNG(adresse);
+						fichier1= new File(adresse);
+						
+						
+						System.out.println("Saisissez l'adresse de la deuxième image.");
+						adresse = sc.nextLine();
+						image2 = new ImagePNG(adresse);
+						fichier2 = new File(adresse);
+						
+						
+					} catch (IOException e) {
+						System.out.println("Impossible de trouver le fichier");
+						afficherLesOptions(imageInitiale, image,original,delta,phi);
+						
+					}
+					
+					if(image1!=null && image2 !=null && fichier1 !=null && fichier2 !=null) {
+			            double wRapport = Math.ceil(10000.0*fichier2.length() / fichier1.length())/100.0;
+						System.out.println("RAPPORT TAILLE : "+wRapport+"%  / EQM : "+ImagePNG.computeEQM(image1, image2)+"%" );
+					}
+					
+					afficherLesOptions(imageInitiale, image,original,delta,phi);
+
+					
+				
+				
 				break;
-			
+				
+			case 7:
+				System.out.println("Application quittée.");
+				System.exit(1);
 		
 		
 		}
