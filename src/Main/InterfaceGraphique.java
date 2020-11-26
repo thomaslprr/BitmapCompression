@@ -99,7 +99,7 @@ public class InterfaceGraphique {
 		lblTitreApplication.setFont(new Font("Krungthep", Font.PLAIN, 21));
 		frame.getContentPane().add(lblTitreApplication);
 		
-		JButton btnNewButton = new JButton("Ajouter");
+		JButton btnNewButton = new JButton("Importer image");
 		btnNewButton.setBounds(6, 68, 147, 29);
 		frame.getContentPane().add(btnNewButton);
 		
