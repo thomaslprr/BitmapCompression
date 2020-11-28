@@ -395,6 +395,7 @@ public class Quadtree {
 		 
 	}
 	
+	
 	public void exporterImage(String nomDuFichier) throws Exception {
 		if(nomDuFichier.equals(".png")) {
 			throw new Exception("Le nom du fichier ne peut pas être vide.");

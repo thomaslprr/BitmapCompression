@@ -3,6 +3,7 @@ package Main;
 
 
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -115,6 +116,20 @@ public class Main {
 				
 				System.out.println("////// FIN DU PROGRAMME \\\\\\");
 			
+			
+			
+		}else if(args.length == 1 && args[0].equals("-a")){
+			
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						InterfaceGraphique window = new InterfaceGraphique();
+						window.getFrame().setVisible(true);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
 			
 			
 		}else {
@@ -253,7 +268,7 @@ public class Main {
 						System.out.println("Vous n'avez apporté aucune modification sur l'image d'origine.");
 					}
 					try {
-						System.out.println("Veuillez saisir le nom que vous voulez donner au fichier (sans l'extansion .png)");
+						System.out.println("Veuillez saisir le nom que vous voulez donner au fichier (sans l'extension .png)");
 						original.exporterImage(sc.nextLine()+".png");
 						System.out.println("Image PNG exportée.");
 						afficherLesOptions(imageInitiale, image,original,delta,phi);
@@ -273,7 +288,7 @@ public class Main {
 			case 5:
 				if(original!=null) {
 					try {
-						System.out.println("Veuillez saisir le nom que vous voulez donner au fichier (sans l'extansion .txt)");
+						System.out.println("Veuillez saisir le nom que vous voulez donner au fichier (sans l'extension .txt)");
 						original.exporterImage(sc.nextLine()+".txt");
 						System.out.println("Fichier texte exporté.");
 						afficherLesOptions(imageInitiale, image,original,delta,phi);
