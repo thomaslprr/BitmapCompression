@@ -159,7 +159,6 @@ public class InterfaceGraphique {
 				fc.setFileFilter(new FileNameExtensionFilter("PNG", "png"));
 				fc.showOpenDialog(new JPanel());
 				try {
-					System.out.println(fc.getSelectedFile().getAbsolutePath());
 					if(panel.getComponentCount()>0) {
 						panel.removeAll();
 					}
