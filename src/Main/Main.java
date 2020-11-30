@@ -154,7 +154,7 @@ public class Main {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		
+		System.out.println("\n ///////////////////////////////////////// \n");
 		System.out.println("1: Charger une image PNG en mémoire dans un quadtree");
 		System.out.println("2: Effectuer une compression Delta");
 		System.out.println("3: Effectuer une compression Phi");

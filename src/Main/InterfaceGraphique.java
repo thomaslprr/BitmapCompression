@@ -117,7 +117,7 @@ public class InterfaceGraphique {
 		frame.getContentPane().add(lblTitreApplication);
 		
 		JButton btnNewButton = new JButton("Importer image");
-		btnNewButton.setBounds(6, 68, 147, 29);
+		btnNewButton.setBounds(6, 68, 174, 29);
 		frame.getContentPane().add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Compresser Phi");
@@ -162,7 +162,7 @@ public class InterfaceGraphique {
 				
 			}
 		});
-		btnNewButton_1.setBounds(6, 150, 147, 29);
+		btnNewButton_1.setBounds(6, 150, 174, 29);
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_1_1 = new JButton("Compresser Delta");
@@ -213,7 +213,7 @@ public class InterfaceGraphique {
 		});
 				
 		
-		btnNewButton_1_1.setBounds(6, 109, 147, 29);
+		btnNewButton_1_1.setBounds(6, 109, 174, 29);
 		frame.getContentPane().add(btnNewButton_1_1);
 		
 		JButton btnNewButton_1_2 = new JButton("Exporter PNG");
@@ -256,7 +256,7 @@ public class InterfaceGraphique {
 				
 			}
 		});
-		btnNewButton_1_2.setBounds(6, 187, 147, 29);
+		btnNewButton_1_2.setBounds(6, 187, 174, 29);
 		frame.getContentPane().add(btnNewButton_1_2);
 		
 		JButton btnNewButton_1_2_1 = new JButton("Exporter texte");
@@ -303,13 +303,13 @@ public class InterfaceGraphique {
 				
 			}
 		});
-		btnNewButton_1_2_1.setBounds(6, 225, 147, 29);
+		btnNewButton_1_2_1.setBounds(6, 225, 174, 29);
 		frame.getContentPane().add(btnNewButton_1_2_1);
 		
 		final JLabel lblSourceFichier = new JLabel("");
 		lblSourceFichier.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSourceFichier.setForeground(Color.RED);
-		lblSourceFichier.setBounds(193, 225, 198, 17);
+		lblSourceFichier.setBounds(193, 225, 266, 17);
 		frame.getContentPane().add(lblSourceFichier);
 		
 		final JPanel panel = new JPanel();
@@ -321,7 +321,7 @@ public class InterfaceGraphique {
 		final JLabel lblTailleFichier = new JLabel("");
 		lblTailleFichier.setForeground(Color.WHITE);
 		lblTailleFichier.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTailleFichier.setBounds(220, 242, 147, 16);
+		lblTailleFichier.setBounds(220, 242, 220, 16);
 		frame.getContentPane().add(lblTailleFichier);
 		
 		
@@ -353,6 +353,7 @@ public class InterfaceGraphique {
 					imageDeBaseSauvegarde = new ImagePNG(fc.getSelectedFile().getAbsolutePath());
 					image = new ImagePNG(fc.getSelectedFile().getAbsolutePath());
 					qt = new Quadtree(image);
+					estCompresse=false;
 					
 				} catch (Exception e1) {
 					lblSourceFichier.setText("Impossible de charger le fichier");
