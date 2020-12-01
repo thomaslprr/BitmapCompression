@@ -184,6 +184,7 @@ public class Main {
 				image = new ImagePNG(adresseFichier);
 				try {
 					original = new Quadtree(image);
+					aDejaCompresse=false;
 					System.out.println("Image PNG chargée en mémoire");
 					afficherLesOptions(imageInitiale, image,original,delta,phi);
 					
