@@ -84,8 +84,8 @@ public class Main {
 					
 					
 					Quadtree qt = new Quadtree(image);
-					Quadtree qtDelta = qt;
-					Quadtree qtPhi = qt;
+					Quadtree qtDelta =  new Quadtree(image);
+					Quadtree qtPhi =  new Quadtree(image);
 					
 					
 					ThreadCompression threadDelta = new ThreadCompression(qtDelta,0,delta,nom,imageACompresser);
