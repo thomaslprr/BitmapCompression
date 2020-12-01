@@ -314,8 +314,8 @@ public class Quadtree {
 			
 		}
 		
-	
-	
+
+
 	public String toString() {
 		
 		String s = recupererChaine(this.carrePrincipal);
