@@ -281,7 +281,7 @@ public class Main {
 				if(original!=null) {
 					try {
 						System.out.println("Veuillez saisir le nom que vous voulez donner au fichier (sans l'extension .txt)");
-						original.exporterImage(sc.nextLine()+".txt");
+						original.exporterTexte(sc.nextLine()+".txt");
 						System.out.println("Fichier texte exporté.");
 						afficherLesOptions(imageInitiale, image,original,delta,phi);
 					} catch (Exception e) {

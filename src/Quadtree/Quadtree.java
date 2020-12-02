@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.TreeSet;
 
 import ImagePng.ImagePNG;
 
@@ -136,14 +137,18 @@ public class Quadtree {
 		
 		}else {
 			
-			ArrayList<Carre> listePereDeFeuille = new ArrayList<>();
+			TreeSet<Carre> listePereDeFeuille = new TreeSet<>(comparerParEcartColorimetrique);
 			
 			getPereDeFeuille(listePereDeFeuille,getCarrePrincipal());
 			
 			
+			
+			
 			while(listePereDeFeuille.size()>0) {
 				
-				Carre c = listePereDeFeuille.get(0);
+				Carre c = listePereDeFeuille.first();
+				//on le supprime de la liste
+				listePereDeFeuille.remove(c);
 				
 					if(c.getEcartColorimetrique()<=delta) {
 					
@@ -164,8 +169,7 @@ public class Quadtree {
 					
 					}
 					
-					//on le supprime de la liste
-					listePereDeFeuille.remove(c);
+					
 									
 				
 				
@@ -201,9 +205,8 @@ public class Quadtree {
 	}
 	
 	
-	public ArrayList<Carre> getPereDeFeuille(ArrayList<Carre> carrePere, Carre c) {
+	public TreeSet<Carre> getPereDeFeuille(TreeSet<Carre> carrePere, Carre c) {
 		
-		ArrayList<Carre> listeCarrePere = carrePere;
 		
 		if(c.estPereDeFeuille()) {
 			
@@ -221,7 +224,7 @@ public class Quadtree {
 			}
 		}
 		
-		return listeCarrePere;
+		return carrePere;
 		
 		
 	}
@@ -242,27 +245,20 @@ public class Quadtree {
 			int nbFeuilles = listeFeuilles.size();
 			
 			
-			//création d'un comparateur d'écart colorimétrique
-			Comparator<Carre> comparerParEcartColorimetrique = new Comparator<Carre>(){
-
-				@Override
-				public int compare(Carre c1, Carre c2) {
-					
-					return c1.compareTo(c2);
-				}
-				
-			};
 			
 			
 			
-			ArrayList<Carre> pereDeFeuille= new ArrayList<>();
+			
+			TreeSet<Carre> pereDeFeuille= new TreeSet<>(comparerParEcartColorimetrique);
 			
 			
 			
 			getPereDeFeuille(pereDeFeuille,carrePrincipal);
 			
-			//on trie les pères de feuille par valeur croissante d'écart colorimétrique
-			Collections.sort(pereDeFeuille, comparerParEcartColorimetrique);
+			System.out.println("Voici le nb de père  : "+pereDeFeuille.size());
+			System.out.println("Voici le nb de feuille  : "+nbFeuilles);
+
+			
 			
 			
 
@@ -271,19 +267,26 @@ public class Quadtree {
 			
 			while(nbFeuilles>phi && pereDeFeuille.size()>0 ) {
 				
+				System.out.println("on est dans le while nb feuille : "+nbFeuilles+ " taille du père : "+pereDeFeuille.size());
+
 				
-				Carre pereQuiDevientFeuille = pereDeFeuille.get(0);
+				
+				Carre pereQuiDevientFeuille = pereDeFeuille.first();
+				
+				
+				
 				
 				//la couleur du père prend la couleur moyenne de ses feuilles
 				pereQuiDevientFeuille.setCouleur(pereQuiDevientFeuille.getCouleurMoyenne());
 
 				
+				//on supprime le père devenu feuille de la liste des pères
+				pereDeFeuille.remove(pereQuiDevientFeuille);
+				
 				//on supprime les 4 feuilles, le noeud devient ainsi une feuille
 				pereQuiDevientFeuille.supprimerFeuilles();
 
 				
-				//on supprime le père devenu feuille de la liste des pères
-				pereDeFeuille.remove(pereQuiDevientFeuille);
 				
 				Carre pereNouvelleFeuille = pereQuiDevientFeuille.getCarrePere();
 				
@@ -295,6 +298,8 @@ public class Quadtree {
 						pereDeFeuille.add(pereNouvelleFeuille);	
 					}
 				}
+				
+				
 				
 				
 				//on décrémente de 3 le nombre de feuille de l'arbre
@@ -403,7 +408,16 @@ public class Quadtree {
 		this.toPNG().save(nomDuFichier);
 	}
 	
-	
+	//création d'un comparateur d'écart colorimétrique
+	Comparator<Carre> comparerParEcartColorimetrique = new Comparator<Carre>(){
+
+		@Override
+		public int compare(Carre c1, Carre c2) {
+			
+			return c1.compareTo(c2);
+		}
+		
+	};
 	
 	
 }
