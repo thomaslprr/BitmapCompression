@@ -2,16 +2,12 @@ package Main;
 
 
 
-import java.awt.Color;
 import java.awt.EventQueue;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import ImagePng.ImagePNG;
-import Quadtree.Carre;
-import Quadtree.Position;
 import Quadtree.Quadtree;
 
 public class Main {
@@ -34,7 +30,6 @@ public class Main {
 			
 
 			String imageACompresser = args[0],
-					typeCompression=null, 
 					valeurCompressionPhi=args[2], 
 					valeurCompressionDelta=args[1];
 			
@@ -81,15 +76,10 @@ public class Main {
 					ImagePNG image = new ImagePNG(imageACompresser);
 					System.out.println("----> IMAGE TROUVEE AVEC SUCCES");
 
+										
 					
-					
-					Quadtree qt = new Quadtree(image);
-					Quadtree qtDelta =  new Quadtree(image);
-					Quadtree qtPhi =  new Quadtree(image);
-					
-					
-					ThreadCompression threadDelta = new ThreadCompression(qtDelta,0,delta,nom,imageACompresser);
-					ThreadCompression threadPhi = new ThreadCompression(qtPhi,1,phi,nom,imageACompresser);
+					ThreadCompression threadDelta = new ThreadCompression(image,0,delta,nom,imageACompresser);
+					ThreadCompression threadPhi = new ThreadCompression(image,1,phi,nom,imageACompresser);
 					
 					threadDelta.run();
 					threadPhi.run();

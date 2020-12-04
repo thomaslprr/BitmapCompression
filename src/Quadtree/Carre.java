@@ -235,11 +235,14 @@ public class Carre implements Comparable<Carre>  {
 		
 		if(this.getEcartColorimetrique()>c.getEcartColorimetrique()) {
 			return 1;
-		}else if(this.getEcartColorimetrique() == c.getEcartColorimetrique()) {
-			return 0;
-		}else {
+		}else if(this.getEcartColorimetrique() < c.getEcartColorimetrique()) {
 			return -1;
+		}else if(this==c){
+			return 0;
 		}
+		
+		return -1;
+		
 	}
 	
 	

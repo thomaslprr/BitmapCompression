@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.TreeSet;
 
@@ -19,6 +18,9 @@ public class Quadtree {
 	int largeur;
 	int hauteur;
 	
+	private TreeSet<Carre> listePereDeFeuilles; 
+	private int cptFeuille;
+	
 
 	
 	public Carre getCarrePrincipal() {
@@ -31,7 +33,7 @@ public class Quadtree {
 		this.hauteur= image.height();
 				
 		
-		
+		listePereDeFeuilles = new TreeSet<Carre>(comparerParEcartColorimetrique);
 		
 		if(largeur!=hauteur || largeur%2 !=0) {
 			//lever une exception
@@ -41,6 +43,7 @@ public class Quadtree {
 		carrePrincipal = new Carre(null,new Position(0,this.largeur,0,this.hauteur),null);
 		
 		generation(carrePrincipal.getPosition(),carrePrincipal);
+		
 		
 		
 	}
@@ -81,7 +84,8 @@ public class Quadtree {
 			listeCarres.add(carre4);
 			
 			c.setListeCarres(listeCarres);
-
+			
+			
 			generation(p1,carre1);
 			generation(p2,carre2);
 			generation(p3,carre3);
@@ -96,7 +100,16 @@ public class Quadtree {
 		
 			
 		}else {
+			
 			c.setCouleur(image.getPixel(p.getxDepart(), p.getyDepart()));
+			
+			cptFeuille++;
+			
+			if(c.getCarrePere().estPereDeFeuille()) {
+				listePereDeFeuilles.add(c.getCarrePere());
+			}
+
+			
 			
 
 		}
@@ -137,18 +150,16 @@ public class Quadtree {
 		
 		}else {
 			
-			TreeSet<Carre> listePereDeFeuille = new TreeSet<>(comparerParEcartColorimetrique);
-			
-			getPereDeFeuille(listePereDeFeuille,getCarrePrincipal());
 			
 			
 			
 			
-			while(listePereDeFeuille.size()>0) {
+			
+			while(listePereDeFeuilles.size()>0) {
 				
-				Carre c = listePereDeFeuille.first();
+				Carre c = listePereDeFeuilles.first();
 				//on le supprime de la liste
-				listePereDeFeuille.remove(c);
+				listePereDeFeuilles.remove(c);
 				
 					if(c.getEcartColorimetrique()<=delta) {
 					
@@ -161,12 +172,14 @@ public class Quadtree {
 						
 						
 						if(c.getCarrePere()!=null && c.getCarrePere().estPereDeFeuille()) {
-							listePereDeFeuille.add(c.getCarrePere());
+							listePereDeFeuilles.add(c.getCarrePere());
 						}
 						
 						
 					
 					
+					}else {
+						break;
 					}
 					
 					
@@ -183,52 +196,11 @@ public class Quadtree {
 	}
 	
 	
-	public ArrayList<Carre> getFeuilles(ArrayList<Carre> listeFeuille, Carre c){
-		
-		ArrayList<Carre> listeFeuilles = listeFeuille;
-		
-		
-		
-		if(c.estFeuille()) {
-			listeFeuilles.add(c);
-		}else {
-			
-			for(Carre ca : c.getListeCarres()) {
-				getFeuilles(listeFeuilles,ca);
-			}
-			
-		}
-		
-		
-		return listeFeuilles;
-		
-	}
+
+
 	
 	
-	public TreeSet<Carre> getPereDeFeuille(TreeSet<Carre> carrePere, Carre c) {
-		
-		
-		if(c.estPereDeFeuille()) {
-			
-			if(!carrePere.contains(c)) {
-				carrePere.add(c);
-			}
-			
-			
-		}else {
-			if(c.getListeCarres().size()==4) {
-				getPereDeFeuille(carrePere,c.getListeCarres().get(0));
-				getPereDeFeuille(carrePere,c.getListeCarres().get(1));
-				getPereDeFeuille(carrePere,c.getListeCarres().get(2));
-				getPereDeFeuille(carrePere,c.getListeCarres().get(3));
-			}
-		}
-		
-		return carrePere;
-		
-		
-	}
-	
+
 	
 	
 	public void compressPhi(int phi) throws Exception {
@@ -238,40 +210,29 @@ public class Quadtree {
 		
 		}else {
 			
-			//on récupère toutes les feuilles de l'arbre
-			ArrayList<Carre> listeFeuilles = new ArrayList<>();
-			getFeuilles(listeFeuilles,carrePrincipal);
 			
-			int nbFeuilles = listeFeuilles.size();
+			
+			int nbFeuilles = cptFeuille;
 			
 			
 			
 			
 			
 			
-			TreeSet<Carre> pereDeFeuille= new TreeSet<>(comparerParEcartColorimetrique);
 			
-			
-			
-			getPereDeFeuille(pereDeFeuille,carrePrincipal);
-			
-			System.out.println("Voici le nb de père  : "+pereDeFeuille.size());
-			System.out.println("Voici le nb de feuille  : "+nbFeuilles);
 
-			
 			
 			
 
 			//il faut supprimer les feuilles en trop tant qu'il y en a en trop
 			//on supprime les feuilles par 4 jusqu'à ce que le nombre de feuille du quadtree passe en dessous de phi.
 			
-			while(nbFeuilles>phi && pereDeFeuille.size()>0 ) {
+			while(nbFeuilles>phi && listePereDeFeuilles.size()>0 ) {
 				
-				System.out.println("on est dans le while nb feuille : "+nbFeuilles+ " taille du père : "+pereDeFeuille.size());
 
 				
 				
-				Carre pereQuiDevientFeuille = pereDeFeuille.first();
+				Carre pereQuiDevientFeuille = listePereDeFeuilles.first();
 				
 				
 				
@@ -281,7 +242,7 @@ public class Quadtree {
 
 				
 				//on supprime le père devenu feuille de la liste des pères
-				pereDeFeuille.remove(pereQuiDevientFeuille);
+				listePereDeFeuilles.remove(pereQuiDevientFeuille);
 				
 				//on supprime les 4 feuilles, le noeud devient ainsi une feuille
 				pereQuiDevientFeuille.supprimerFeuilles();
@@ -291,11 +252,11 @@ public class Quadtree {
 				Carre pereNouvelleFeuille = pereQuiDevientFeuille.getCarrePere();
 				
 				if(nbFeuilles-3<4) {
-					pereDeFeuille.add(this.getCarrePrincipal());
+					listePereDeFeuilles.add(this.getCarrePrincipal());
 					
 				}else {
 					if(pereNouvelleFeuille.estPereDeFeuille()) {
-						pereDeFeuille.add(pereNouvelleFeuille);	
+						listePereDeFeuilles.add(pereNouvelleFeuille);	
 					}
 				}
 				
@@ -320,6 +281,28 @@ public class Quadtree {
 		}
 		
 
+public TreeSet<Carre> getFeuilles(TreeSet<Carre> listeFeuille, Carre c){
+		
+		TreeSet<Carre> listeFeuilles = listeFeuille;
+		
+		
+		
+		if(c.estFeuille()) {
+			listeFeuilles.add(c);
+		}else {
+			
+			for(Carre ca : c.getListeCarres()) {
+				getFeuilles(listeFeuilles,ca);
+			}
+			
+		}
+		
+		
+		return listeFeuilles;
+		
+	}
+	
+	
 
 	public String toString() {
 		
@@ -360,7 +343,7 @@ public class Quadtree {
 		
 		ImagePNG img = image;
 		
-		ArrayList<Carre> feuilles = new ArrayList<Carre>();
+		TreeSet<Carre> feuilles = new TreeSet<Carre>(comparerParEcartObjet);
 		
 		getFeuilles(feuilles,carrePrincipal);
 		
@@ -418,6 +401,20 @@ public class Quadtree {
 		}
 		
 	};
+	
+	//création d'un comparateur d'objet
+		Comparator<Carre> comparerParEcartObjet = new Comparator<Carre>(){
+
+			@Override
+			public int compare(Carre c1, Carre c2) {
+				
+				if(c1.equals(c2)) {
+					return 0;
+				}
+				return -1;
+			}
+			
+		};
 	
 	
 }

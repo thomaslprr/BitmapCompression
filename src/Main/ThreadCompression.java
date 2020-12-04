@@ -1,7 +1,6 @@
 package Main;
 
 import java.io.File;
-import java.io.IOException;
 
 import ImagePng.ImagePNG;
 import Quadtree.Quadtree;
@@ -12,16 +11,18 @@ public class ThreadCompression extends Thread implements Runnable {
 	int typeCompression;
 	int valCompression;
 	String nom;
-	ImagePNG image;
 	String adresseFichier;
 	
-	public ThreadCompression(Quadtree quadtree, int typeCompression ,int valCompression,String nom,String fichier) {
-		this.qt = quadtree;
-		this.image= image;
-		this.typeCompression = typeCompression;
-		this.valCompression = valCompression;
-		this.nom = nom;
-		this.adresseFichier = fichier;
+	public ThreadCompression(ImagePNG im, int typeCompression ,int valCompression,String nom,String fichier) {
+		try {
+			this.qt = new Quadtree(im);
+			this.typeCompression = typeCompression;
+			this.valCompression = valCompression;
+			this.nom = nom;
+			this.adresseFichier = fichier;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
