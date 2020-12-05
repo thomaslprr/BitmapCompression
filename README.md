@@ -26,7 +26,7 @@ Les feuilles F1, F2, F3, F4 d’un même noeud N sont supprimées ssi l'écart c
 ### Compression phi
 
 On peut également définir la compression en fonction d’un poids maximum souhaité, ce qui peut se traduire par un entier <b>phi</b> > 0 représentant le nombre maximum de feuilles autorisées dans l’arbre.
-Les feuilles sont alors élaguées par ordre croissant de l'écart colorimétrique.
+Les feuilles sont alors élaguées par ordre croissant de l'écart colorimétrique. Le gif ci-dessus représente cette compression.
 
 ## Utilisation du module
 
