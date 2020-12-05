@@ -42,8 +42,7 @@ public class Quadtree {
 		
 		carrePrincipal = new Carre(null,new Position(0,this.largeur,0,this.hauteur),null);
 		
-		generation(carrePrincipal.getPosition(),carrePrincipal);
-		
+		generation(carrePrincipal.getPosition(),carrePrincipal);		
 		
 		
 	}
@@ -150,45 +149,29 @@ public class Quadtree {
 		
 		}else {
 			
-			
-			
-			
-			
-			
-			while(listePereDeFeuilles.size()>0) {
+	
+			while(listePereDeFeuilles.size()>0  && listePereDeFeuilles.first().getEcartColorimetrique()<=delta) {
 				
 				Carre c = listePereDeFeuilles.first();
 				//on le supprime de la liste
 				listePereDeFeuilles.remove(c);
 				
-					if(c.getEcartColorimetrique()<=delta) {
 					
 
-						//on attribue la couleur moyenne au noeud pere
-						c.setCouleur(c.getCouleurMoyenne());
+				//on attribue la couleur moyenne au noeud pere
+				c.setCouleur(c.getCouleurMoyenne());
 					
-						//on supprime ses feuilles
-						c.supprimerFeuilles();
+				//on supprime ses feuilles
+				c.supprimerFeuilles();
 						
 						
-						if(c.getCarrePere()!=null && c.getCarrePere().estPereDeFeuille()) {
-							listePereDeFeuilles.add(c.getCarrePere());
-						}
+				if(c.getCarrePere()!=null && c.getCarrePere().estPereDeFeuille()) {
+					listePereDeFeuilles.add(c.getCarrePere());
+				}
 						
-						
-					
-					
-					}else {
-						break;
-					}
-					
-					
-									
-				
 				
 			}
-			
-				
+					
 			
 		}
 		
@@ -198,10 +181,7 @@ public class Quadtree {
 	
 
 
-	
-	
 
-	
 	
 	public void compressPhi(int phi) throws Exception {
 		
@@ -213,16 +193,7 @@ public class Quadtree {
 			
 			
 			int nbFeuilles = cptFeuille;
-			
-			
-			
-			
-			
-			
-			
 
-			
-			
 
 			//il faut supprimer les feuilles en trop tant qu'il y en a en trop
 			//on supprime les feuilles par 4 jusqu'à ce que le nombre de feuille du quadtree passe en dessous de phi.
@@ -234,15 +205,14 @@ public class Quadtree {
 				
 				Carre pereQuiDevientFeuille = listePereDeFeuilles.first();
 				
-				
+				//on supprime le père devenu feuille de la liste des pères
+				listePereDeFeuilles.remove(pereQuiDevientFeuille);
 				
 				
 				//la couleur du père prend la couleur moyenne de ses feuilles
 				pereQuiDevientFeuille.setCouleur(pereQuiDevientFeuille.getCouleurMoyenne());
 
 				
-				//on supprime le père devenu feuille de la liste des pères
-				listePereDeFeuilles.remove(pereQuiDevientFeuille);
 				
 				//on supprime les 4 feuilles, le noeud devient ainsi une feuille
 				pereQuiDevientFeuille.supprimerFeuilles();
@@ -254,10 +224,9 @@ public class Quadtree {
 				if(nbFeuilles-3<4) {
 					listePereDeFeuilles.add(this.getCarrePrincipal());
 					
-				}else {
-					if(pereNouvelleFeuille.estPereDeFeuille()) {
-						listePereDeFeuilles.add(pereNouvelleFeuille);	
-					}
+				}else if(pereNouvelleFeuille.estPereDeFeuille()) {
+					listePereDeFeuilles.add(pereNouvelleFeuille);	
+					
 				}
 				
 				
@@ -306,6 +275,9 @@ public TreeSet<Carre> getFeuilles(TreeSet<Carre> listeFeuille, Carre c){
 
 	public String toString() {
 		
+		if(listePereDeFeuilles.size()==1) {
+			return "("+ImagePNG.colorToHex(carrePrincipal.getCouleur())+")";
+		}
 		String s = recupererChaine(this.carrePrincipal);
 		return s.replace("( ", "(");
 	}

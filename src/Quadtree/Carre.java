@@ -78,13 +78,14 @@ public class Carre implements Comparable<Carre>  {
 			int rougeMoyen = 0 ;
 			int vertMoyen = 0;
 			int bleuMoyen = 0;
-			
-			for(Carre c : carrePere.listeCarres) {
-				rougeMoyen+=c.getCouleur().getRed();
-				vertMoyen+= c.getCouleur().getGreen();
-				bleuMoyen+=c.getCouleur().getBlue();
-				
-				
+			if(carrePere!=null) {
+				for(Carre c : carrePere.listeCarres) {
+					rougeMoyen+=c.getCouleur().getRed();
+					vertMoyen+= c.getCouleur().getGreen();
+					bleuMoyen+=c.getCouleur().getBlue();
+					
+					
+				}
 			}
 			
 			rougeMoyen /= 4;
